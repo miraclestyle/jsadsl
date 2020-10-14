@@ -1,0 +1,19 @@
+{
+  "name": "jsadsl",
+  "version": "1.0.0",
+  "description": "JavaScript Algorithms and Data Structures Library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miraclestyle/jsadsl.git"
+  },
+  "author": "E.K.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miraclestyle/jsadsl/issues"
+  },
+  "homepage": "https://github.com/miraclestyle/jsadsl#readme"
+}
