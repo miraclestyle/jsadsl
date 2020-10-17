@@ -1,6 +1,6 @@
 const sort = require('../../lib/sort');
 
-describe('bubble', () => {
+describe('bubble sort', () => {
   test('should sort a single element array', () => {
     const array = [1];
     sort.bubble(array);
