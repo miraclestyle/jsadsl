@@ -80,6 +80,15 @@ describe('less', () => {
   test('shoud return false when arguments are 1 and 1', () => {
     expect(sort.util.less(1, 1)).toBe(false);
   });
+
+  test('shoud return true when arguments are 2, 1, and custom compare function', () => {
+    const compare = (a, b) => {
+      if (a > b) return -1;
+      if (a < b) return 1;
+      return 0;
+    };
+    expect(sort.util.less(2, 1, compare)).toBe(true);
+  });
 });
 
 describe('more', () => {
@@ -93,6 +102,15 @@ describe('more', () => {
 
   test('shoud return false when arguments are 1 and 1', () => {
     expect(sort.util.more(1, 1)).toBe(false);
+  });
+
+  test('shoud return true when arguments are 1, 2, and custom compare function', () => {
+    const compare = (a, b) => {
+      if (a > b) return -1;
+      if (a < b) return 1;
+      return 0;
+    };
+    expect(sort.util.more(1, 2, compare)).toBe(true);
   });
 });
 
