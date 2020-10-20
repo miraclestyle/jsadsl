@@ -1,27 +1,27 @@
 const sort = require('../../lib/sort');
 
-describe('bubble sort', () => {
+describe('selection sort', () => {
   test('should sort a single element array', () => {
     const array = [1];
-    sort.bubble(array);
+    sort.selection(array);
     expect(sort.isSorted(array)).toBe(true);
   });
 
   test('should not unsort a sorted array', () => {
     const array = [1, 2, 3, 4, 5];
-    sort.bubble(array);
+    sort.selection(array);
     expect(sort.isSorted(array)).toBe(true);
   });
 
   test('should sort an array', () => {
     const array = [5, 3, 1, 4, 2];
-    sort.bubble(array);
+    sort.selection(array);
     expect(sort.isSorted(array)).toBe(true);
   });
 
   test('should partialy sort an array with custom range', () => {
     const array = [5, 3, 1, 4, 2];
-    sort.bubble(array, undefined, 0, 2);
+    sort.selection(array, undefined, 0, 2);
     expect(sort.isSorted(array, undefined, 0, 2)).toBe(true);
   });
 
@@ -32,7 +32,7 @@ describe('bubble sort', () => {
       if (a < b) return 1;
       return 0;
     };
-    sort.bubble(array, compare);
+    sort.selection(array, compare);
     expect(sort.isSorted(array, compare)).toBe(true);
   });
 });

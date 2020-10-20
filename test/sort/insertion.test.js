@@ -19,6 +19,12 @@ describe('insertion sort', () => {
     expect(sort.isSorted(array)).toBe(true);
   });
 
+  test('should partialy sort an array with custom range', () => {
+    const array = [5, 3, 1, 4, 2];
+    sort.insertion(array, undefined, 0, 2);
+    expect(sort.isSorted(array, undefined, 0, 2)).toBe(true);
+  });
+
   test('should sort an array in descending order', () => {
     const array = [5, 3, 1, 4, 2];
     const compare = (a, b) => {
