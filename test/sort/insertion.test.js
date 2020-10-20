@@ -35,4 +35,14 @@ describe('insertion sort', () => {
     sort.insertion(array, compare);
     expect(sort.isSorted(array, compare)).toBe(true);
   });
+
+  test('should sort a randomized array of 20,000 items', () => {
+    const n = 20000;
+    const array = [];
+    for (let i = 0; i < n; i += 1) {
+      array.push(sort.util.randomInt(i, n));
+    }
+    sort.insertion(array);
+    expect(sort.isSorted(array)).toBe(true);
+  });
 });
