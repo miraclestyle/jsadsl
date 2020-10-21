@@ -1,30 +1,45 @@
 const sort = require('../../lib/sort');
 
+let array = [];
+const n = 10;
+
+const init = (low = 0, high = n) => {
+  const output = [];
+  for (let i = low; i < high; i += 1) {
+    output.push(i);
+  }
+  return output;
+};
+
 describe('shuffle', () => {
+  beforeEach(() => {
+    array = init();
+  });
+
   test('should randomize an empty array', () => {
-    const array = [];
+    array = init(0, 0);
     sort.shuffle(array);
     expect(sort.isSorted(array)).toBe(true);
   });
 
   test('should randomize a sorted array with single element', () => {
-    const array = [1];
+    array = init(1, 2);
     sort.shuffle(array);
     expect(sort.isSorted(array)).toBe(true);
   });
 
   test('should randomize a sorted array', () => {
-    const array = [1, 2, 3, 4, 5];
     sort.shuffle(array);
     expect(sort.isSorted(array)).toBe(false);
   });
 
+  test('should partialy randomize a sorted array with custom range', () => {
+    sort.shuffle(array, 0, 5);
+    expect(sort.isSorted(array, undefined, 0, 5)).toBe(false);
+  });
+
   test('should randomize a sorted array of 20,000 items', () => {
-    const n = 20000;
-    const array = [];
-    for (let i = 0; i < n; i += 1) {
-      array.push(i + 1);
-    }
+    array = init(0, 20000);
     sort.shuffle(array);
     expect(sort.isSorted(array)).toBe(false);
   });
