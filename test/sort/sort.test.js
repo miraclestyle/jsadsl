@@ -1,6 +1,6 @@
 const sort = require('../../lib/sort');
 
-const sorts = ['bubble', 'insertion', 'selection', 'shell'];
+const sorts = ['bubble', 'insertion', 'selection', 'shell', 'merge'];
 let array = [];
 const n = 10;
 
@@ -39,8 +39,8 @@ describe.each(sorts)('%s sort', (name) => {
   });
 
   test('should partialy sort an array with custom range', () => {
-    sort[name](array, undefined, 0, 5);
-    expect(sort.isSorted(array, undefined, 0, 5)).toBe(true);
+    sort[name](array, undefined, 3, 8);
+    expect(sort.isSorted(array, undefined, 3, 8)).toBe(true);
   });
 
   test('should sort an array in descending order', () => {
