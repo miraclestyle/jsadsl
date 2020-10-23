@@ -42,7 +42,7 @@ describe('isSorted', () => {
   });
 
   test('should return true for a partially sorted array with custom range', () => {
-    expect(sort.isSorted(array, undefined, 0, 5)).toBe(true);
+    expect(sort.isSorted(array, undefined, 3, 8)).toBe(true);
   });
 
   test('should return false for a reverse sorted array', () => {

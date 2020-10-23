@@ -34,8 +34,8 @@ describe('shuffle', () => {
   });
 
   test('should partialy randomize a sorted array with custom range', () => {
-    sort.shuffle(array, 0, 5);
-    expect(sort.isSorted(array, undefined, 0, 5)).toBe(false);
+    sort.shuffle(array, 3, 8);
+    expect(sort.isSorted(array, undefined, 3, 8)).toBe(false);
   });
 
   test('should randomize a sorted array of 20,000 items', () => {
