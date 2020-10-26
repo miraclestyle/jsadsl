@@ -13,24 +13,20 @@ const init = (low = 0, high = n) => {
 };
 
 describe.each(sorts)('%s sort', (name) => {
-  beforeAll(() => {
+  beforeEach(() => {
     array = init();
   });
 
-  beforeEach(() => {
-    sort.shuffle(array);
-  });
-
   test('should sort a single element array', () => {
-    const custom = init(1, 2);
-    sort[name](custom);
-    expect(sort.isSorted(custom)).toBe(true);
+    array = init(1, 2);
+    sort[name](array);
+    expect(sort.isSorted(array)).toBe(true);
   });
 
   test('should not unsort a sorted array', () => {
-    const custom = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    sort[name](custom);
-    expect(sort.isSorted(custom)).toBe(true);
+    array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    sort[name](array);
+    expect(sort.isSorted(array)).toBe(true);
   });
 
   test('should sort an array', () => {
