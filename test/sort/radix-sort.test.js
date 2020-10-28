@@ -36,6 +36,11 @@ describe.each(sorts)('%s sort', (name) => {
     expect(sort.isSorted(array)).toBe(true);
   });
 
+  test('should partialy sort an array with custom range', () => {
+    sort[name](array, undefined, 0, 3, 8);
+    expect(sort.isSorted(array, undefined, 3, 8)).toBe(true);
+  });
+
   test('should sort an array in descending order', () => {
     const compare = (a, b) => {
       if (a > b) return -1;
@@ -51,8 +56,8 @@ describe.each(sorts)('%s sort', (name) => {
     expect(sort.isSorted(array, compare)).toBe(true);
   });
 
-  test('should sort a randomized array of 20,000 items', () => {
-    array = init(0, 20000);
+  test('should sort a randomized array of 10,000 items', () => {
+    array = init(0, 10000);
     sort[name](array);
     expect(sort.isSorted(array)).toBe(true);
   });
