@@ -1,6 +1,7 @@
 const sort = require('../../lib/sort');
 
-const sorts = ['bubble', 'insertion', 'selection', 'shell', 'merge', 'quick'];
+const sorts = ['bubble', 'selection', 'insertion', 'shell', 'merge', 'quick'];
+// const sorts = ['merge', 'quick'];
 let array = [];
 const n = 10;
 
@@ -49,8 +50,8 @@ describe.each(sorts)('%s sort', (name) => {
     expect(sort.isSorted(array, compare)).toBe(true);
   });
 
-  test('should sort a randomized array of 20,000 items', () => {
-    array = init(0, 20000);
+  test('should sort a randomized array of 10,000 items', () => {
+    array = init(0, 10000);
     sort[name](array);
     expect(sort.isSorted(array)).toBe(true);
   });
