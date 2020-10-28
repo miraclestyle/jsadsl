@@ -55,4 +55,15 @@ describe.each(sorts)('%s sort', (name) => {
     sort[name](array);
     expect(sort.isSorted(array)).toBe(true);
   });
+
+  test('should sort a randomized array of 1,000,000 items with fast sorts', () => {
+    const fastSorts = new Set(['merge', 'quick', 'threeWayQuick']);
+    if (fastSorts.has(name)) {
+      array = init(0, 1000000);
+      sort[name](array);
+      expect(sort.isSorted(array)).toBe(true);
+    } else {
+      expect(true).toBe(true);
+    }
+  });
 });
