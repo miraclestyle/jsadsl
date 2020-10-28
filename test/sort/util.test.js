@@ -114,6 +114,29 @@ describe('more', () => {
   });
 });
 
+describe('equal', () => {
+  test('shoud return false when arguments are 1 and 2', () => {
+    expect(sort.util.equal(1, 2)).toBe(false);
+  });
+
+  test('shoud return false when arguments are 2 and 1', () => {
+    expect(sort.util.equal(2, 1)).toBe(false);
+  });
+
+  test('shoud return true when arguments are 1 and 1', () => {
+    expect(sort.util.equal(1, 1)).toBe(true);
+  });
+
+  test('shoud return true when arguments are 1, 1, and custom compare function', () => {
+    const compare = (a, b) => {
+      if (a > b) return -1;
+      if (a < b) return 1;
+      return 0;
+    };
+    expect(sort.util.equal(1, 1, compare)).toBe(true);
+  });
+});
+
 describe('swap', () => {
   test('should handle single element array', () => {
     const array = [1];
