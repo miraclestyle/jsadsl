@@ -1,6 +1,6 @@
 const sort = require('../../lib/sort');
 
-const sorts = ['bubble', 'selection', 'insertion', 'shell', 'merge', 'quick', 'threeWayQuick'];
+const sorts = ['bubble', 'selection', 'insertion', 'shell', 'heap', 'merge', 'quick', 'threeWayQuick'];
 // const sorts = ['merge', 'quick'];
 let array = [];
 const n = 10;
@@ -57,7 +57,12 @@ describe.each(sorts)('%s sort', (name) => {
   });
 
   test('should sort a randomized array of 1,000,000 items with fast sorts', () => {
-    const fastSorts = new Set(['merge', 'quick', 'threeWayQuick']);
+    const fastSorts = new Set([
+      'heap',
+      'merge',
+      'quick',
+      'threeWayQuick',
+    ]);
     if (fastSorts.has(name)) {
       array = init(0, 1000000);
       sort[name](array);
