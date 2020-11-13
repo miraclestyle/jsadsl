@@ -2,7 +2,7 @@ const sort = require('../../lib/sort');
 
 const sorts = ['keyIndexCounting', 'lsd', 'msd'];
 let array = [];
-const n = 10;
+const n = 20;
 const s = 5;
 
 const init = (low = 0, high = n, w = s) => {
@@ -18,7 +18,7 @@ const init = (low = 0, high = n, w = s) => {
   return output;
 };
 
-xdescribe.each(sorts)('%s sort', (name) => {
+describe.each(sorts)('%s sort', (name) => {
   beforeEach(() => {
     if (name === 'keyIndexCounting') {
       array = init(0, n, 1);
@@ -44,9 +44,7 @@ xdescribe.each(sorts)('%s sort', (name) => {
   });
 
   test('should sort an array', () => {
-    if (name === 'msd') console.log(array);
     sort[name](array);
-    if (name === 'msd') console.log(array);
     expect(sort.isSorted(array)).toBe(true);
   });
 
@@ -62,8 +60,9 @@ xdescribe.each(sorts)('%s sort', (name) => {
       return 0;
     };
     const transform = (value, index) => {
+      if (index >= value.length) return -1;
       const reference = ('z').charCodeAt(0);
-      const code = index < value.length ? value.charCodeAt(index) : reference - 1;
+      const code = value.charCodeAt(index);
       return reference - code;
     };
     sort[name](array, transform);
