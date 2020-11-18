@@ -13,7 +13,7 @@ const init = (low = 0, high = n) => {
   return output;
 };
 
-describe.each(sorts)('%s sort', (name) => {
+xdescribe.each(sorts)('%s sort', (name) => {
   beforeEach(() => {
     array = init();
   });

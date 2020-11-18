@@ -69,19 +69,19 @@ describe('randomInt', () => {
 });
 
 describe('less', () => {
-  test('shoud return true when arguments are 1 and 2', () => {
+  test('should return true when arguments are 1 and 2', () => {
     expect(sort.util.less(1, 2)).toBe(true);
   });
 
-  test('shoud return false when arguments are 2 and 1', () => {
+  test('should return false when arguments are 2 and 1', () => {
     expect(sort.util.less(2, 1)).toBe(false);
   });
 
-  test('shoud return false when arguments are 1 and 1', () => {
+  test('should return false when arguments are 1 and 1', () => {
     expect(sort.util.less(1, 1)).toBe(false);
   });
 
-  test('shoud return true when arguments are 2, 1, and custom compare function', () => {
+  test('should return true when arguments are 2, 1, and custom compare function', () => {
     const compare = (a, b) => {
       if (a > b) return -1;
       if (a < b) return 1;
@@ -92,19 +92,19 @@ describe('less', () => {
 });
 
 describe('more', () => {
-  test('shoud return false when arguments are 1 and 2', () => {
+  test('should return false when arguments are 1 and 2', () => {
     expect(sort.util.more(1, 2)).toBe(false);
   });
 
-  test('shoud return true when arguments are 2 and 1', () => {
+  test('should return true when arguments are 2 and 1', () => {
     expect(sort.util.more(2, 1)).toBe(true);
   });
 
-  test('shoud return false when arguments are 1 and 1', () => {
+  test('should return false when arguments are 1 and 1', () => {
     expect(sort.util.more(1, 1)).toBe(false);
   });
 
-  test('shoud return true when arguments are 1, 2, and custom compare function', () => {
+  test('should return true when arguments are 1, 2, and custom compare function', () => {
     const compare = (a, b) => {
       if (a > b) return -1;
       if (a < b) return 1;
@@ -115,19 +115,19 @@ describe('more', () => {
 });
 
 describe('equal', () => {
-  test('shoud return false when arguments are 1 and 2', () => {
+  test('should return false when arguments are 1 and 2', () => {
     expect(sort.util.equal(1, 2)).toBe(false);
   });
 
-  test('shoud return false when arguments are 2 and 1', () => {
+  test('should return false when arguments are 2 and 1', () => {
     expect(sort.util.equal(2, 1)).toBe(false);
   });
 
-  test('shoud return true when arguments are 1 and 1', () => {
+  test('should return true when arguments are 1 and 1', () => {
     expect(sort.util.equal(1, 1)).toBe(true);
   });
 
-  test('shoud return true when arguments are 1, 1, and custom compare function', () => {
+  test('should return true when arguments are 1, 1, and custom compare function', () => {
     const compare = (a, b) => {
       if (a > b) return -1;
       if (a < b) return 1;

@@ -22,21 +22,21 @@ describe('isSorted', () => {
     array = init();
   });
 
-  test('shoud return true for an empty array', () => {
+  test('should return true for an empty array', () => {
     array = init(0, 0);
     expect(sort.isSorted(array)).toBe(true);
   });
 
-  test('shoud return true for a single element array', () => {
+  test('should return true for a single element array', () => {
     array = init(1, 2);
     expect(sort.isSorted(array)).toBe(true);
   });
 
-  test('shoud return true for a sorted array', () => {
+  test('should return true for a sorted array', () => {
     expect(sort.isSorted(array)).toBe(true);
   });
 
-  test('shoud return false for an unsorted array', () => {
+  test('should return false for an unsorted array', () => {
     sort.shuffle(array);
     expect(sort.isSorted(array)).toBe(false);
   });
