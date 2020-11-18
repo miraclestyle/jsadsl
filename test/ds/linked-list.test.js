@@ -1,10 +1,11 @@
 const ds = require('../../lib/ds/index');
 
+const structures = ['singlyLinkedList', 'doublyLinkedList'];
 let list = null;
 
-describe('Singly Linked List', () => {
+describe.each(structures)('%s', (name) => {
   beforeEach(()=> {
-    list = ds.sll();
+    list = ds[name]();
   });
 
   test('should report empty for an empty list', () => {
@@ -100,6 +101,11 @@ describe('Singly Linked List', () => {
     expect(array).toEqual([100, 80, 60, 40, 20, 10, 30, 50, 70, 90]);
   });
 
+  test('should not remove an item from an empty list', () => {
+    list.remove(100);
+    expect(list.empty()).toBe(true);
+  });
+
   test('should remove the last item from a non-empty list', () => {
     list.insertHead(100);
     list.remove(100);
@@ -170,12 +176,10 @@ describe('Singly Linked List', () => {
     for (let i = 1; i <= 10; i += 1) {
       list.insertHead(i * 10);
     }
-    let str = '|';
-    list.forEach((node) => {
-      str += '->';
-      str += node.value;
-    });
-    expect(list.print()).toBe(str);
+    const singly = '100->90->80->70->60->50->40->30->20->10';
+    const doubly = '100<->90<->80<->70<->60<->50<->40<->30<->20<->10';
+    if (name === 'singlyLinkedList') expect(list.print()).toBe(singly);
+    if (name === 'doublyLinkedList') expect(list.print()).toBe(doubly);
   });
 
   test('should update an item in a non-empty list', () => {
