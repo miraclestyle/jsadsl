@@ -119,10 +119,10 @@ describe.each(structures)('%s', (name) => {
     let array = [];
     list.forEach((node) => array.push(node.value));
     expect(array).toEqual([100, 90, 80, 70, 60, 50, 40, 30, 20, 10]);
-    list.remove(40);
+    list.remove(60);
     array = [];
     list.forEach((node) => array.push(node.value));
-    expect(array).toEqual([100, 90, 80, 70, 60, 50, 30, 20, 10]);
+    expect(array).toEqual([100, 90, 80, 70, 50, 40, 30, 20, 10]);
   });
 
   test('should remove multiple items from a non-empty list', () => {
@@ -133,11 +133,13 @@ describe.each(structures)('%s', (name) => {
     list.forEach((node) => array.push(node.value));
     expect(array).toEqual([100, 90, 80, 70, 60, 50, 40, 30, 20, 10]);
     list.remove(50);
-    list.remove(80);
-    list.remove(20);
+    list.remove(70);
+    list.remove(30);
+    list.remove(10);
+    list.remove(100);
     array = [];
     list.forEach((node) => array.push(node.value));
-    expect(array).toEqual([100, 90, 70, 60, 40, 30, 10]);
+    expect(array).toEqual([90, 80, 60, 40, 20]);
   });
 
   test('should remove all items from a non-empty list', () => {
