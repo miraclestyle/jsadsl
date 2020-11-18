@@ -1,7 +1,6 @@
 const sort = require('../../lib/sort');
 
 const sorts = ['bubble', 'selection', 'insertion', 'shell', 'heap', 'merge', 'quick', 'threeWayQuick'];
-// const sorts = ['merge', 'quick'];
 let array = [];
 const n = 10;
 
