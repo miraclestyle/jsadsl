@@ -13,7 +13,7 @@ const init = (low = 0, high = n) => {
   return output;
 };
 
-xdescribe.each(sorts)('%s sort', (name) => {
+describe.each(sorts)('%s sort', (name) => {
   beforeEach(() => {
     array = init();
   });
@@ -58,7 +58,7 @@ xdescribe.each(sorts)('%s sort', (name) => {
 
   test('should sort a randomized array of 1,000,000 items with fast sorts', () => {
     const fastSorts = new Set([
-      'repeat',
+      'merge',
     ]);
     if (fastSorts.has(name)) {
       array = init(0, 1000000);
