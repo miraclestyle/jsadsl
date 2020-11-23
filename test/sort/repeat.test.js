@@ -1,7 +1,6 @@
 const sort = require('../../lib/sort');
 
 const sorts = ['repeat'];
-// const sorts = ['merge', 'quick'];
 let array = [];
 const n = 10;
 
