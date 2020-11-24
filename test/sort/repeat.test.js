@@ -57,7 +57,7 @@ describe.each(sorts)('%s sort', (name) => {
 
   test('should sort a randomized array of 1,000,000 items with fast sorts', () => {
     const fastSorts = new Set([
-      'merge',
+      'repeat',
     ]);
     if (fastSorts.has(name)) {
       array = init(0, 1000000);
