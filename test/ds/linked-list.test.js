@@ -106,6 +106,16 @@ describe.each(structures)('%s', (name) => {
     expect(list.empty()).toBe(true);
   });
 
+  test('should not remove head item from an empty list', () => {
+    list.removeHead();
+    expect(list.empty()).toBe(true);
+  });
+
+  test('should not remove tail item from an empty list', () => {
+    list.removeTail();
+    expect(list.empty()).toBe(true);
+  });
+
   test('should remove the last item from a non-empty list', () => {
     list.insertHead(100);
     list.remove(100);
@@ -125,6 +135,32 @@ describe.each(structures)('%s', (name) => {
     expect(array).toEqual([100, 90, 80, 70, 50, 40, 30, 20, 10]);
   });
 
+  test('should remove head item from a non-empty list', () => {
+    for (let i = 1; i <= 10; i += 1) {
+      list.insertHead(i * 10);
+    }
+    let array = [];
+    list.forEach((node) => array.push(node.value));
+    expect(array).toEqual([100, 90, 80, 70, 60, 50, 40, 30, 20, 10]);
+    list.removeHead();
+    array = [];
+    list.forEach((node) => array.push(node.value));
+    expect(array).toEqual([90, 80, 70, 60, 50, 40, 30, 20, 10]);
+  });
+
+  test('should remove tail item from a non-empty list', () => {
+    for (let i = 1; i <= 10; i += 1) {
+      list.insertHead(i * 10);
+    }
+    let array = [];
+    list.forEach((node) => array.push(node.value));
+    expect(array).toEqual([100, 90, 80, 70, 60, 50, 40, 30, 20, 10]);
+    list.removeTail();
+    array = [];
+    list.forEach((node) => array.push(node.value));
+    expect(array).toEqual([100, 90, 80, 70, 60, 50, 40, 30, 20]);
+  });
+
   test('should remove multiple items from a non-empty list', () => {
     for (let i = 1; i <= 10; i += 1) {
       list.insertHead(i * 10);
@@ -142,6 +178,20 @@ describe.each(structures)('%s', (name) => {
     expect(array).toEqual([90, 80, 60, 40, 20]);
   });
 
+  test('should remove head and tail item from a non-empty list', () => {
+    for (let i = 1; i <= 10; i += 1) {
+      list.insertHead(i * 10);
+    }
+    let array = [];
+    list.forEach((node) => array.push(node.value));
+    expect(array).toEqual([100, 90, 80, 70, 60, 50, 40, 30, 20, 10]);
+    list.removeHead();
+    list.removeTail();
+    array = [];
+    list.forEach((node) => array.push(node.value));
+    expect(array).toEqual([90, 80, 70, 60, 50, 40, 30, 20]);
+  });
+
   test('should remove all items from a non-empty list', () => {
     for (let i = 1; i <= 10; i += 1) {
       list.insertHead(i * 10);
@@ -155,12 +205,54 @@ describe.each(structures)('%s', (name) => {
     expect(list.empty()).toBe(true);
   });
 
+  test('should remove head items from a non-empty list', () => {
+    for (let i = 1; i <= 10; i += 1) {
+      list.insertHead(i * 10);
+    }
+    const array = [];
+    list.forEach((node) => array.push(node.value));
+    expect(array).toEqual([100, 90, 80, 70, 60, 50, 40, 30, 20, 10]);
+    while (!list.empty()) {
+      list.removeHead();
+    }
+    expect(list.empty()).toBe(true);
+  });
+
+  test('should remove tail items from a non-empty list', () => {
+    for (let i = 1; i <= 10; i += 1) {
+      list.insertHead(i * 10);
+    }
+    const array = [];
+    list.forEach((node) => array.push(node.value));
+    expect(array).toEqual([100, 90, 80, 70, 60, 50, 40, 30, 20, 10]);
+    while (!list.empty()) {
+      list.removeTail();
+    }
+    expect(list.empty()).toBe(true);
+  });
+
   test('should find a node in a list with multiple items', () => {
     for (let i = 1; i <= 10; i += 1) {
       list.insertHead(i * 10);
     }
     const node = list.find(50);
     expect(node.value).toBe(50);
+  });
+
+  test('should get head item from a non-empty list', () => {
+    for (let i = 1; i <= 10; i += 1) {
+      list.insertHead(i * 10);
+    }
+    const node = list.getHead();
+    expect(node.value).toBe(100);
+  });
+
+  test('should get tail item from a non-empty list', () => {
+    for (let i = 1; i <= 10; i += 1) {
+      list.insertHead(i * 10);
+    }
+    const node = list.getTail();
+    expect(node.value).toBe(10);
   });
 
   test('should iterate over multiple items in a non-empty list', () => {

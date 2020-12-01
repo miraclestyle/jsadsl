@@ -69,6 +69,13 @@ describe.each(structures)('%s', (name) => {
     expect(array.empty()).toBe(true);
   });
 
+  test('should get the last item from a non-empty list', () => {
+    array.insert(100);
+    array.insert(90);
+    array.insert(80);
+    expect(array.getLast()).toBe(80);
+  });
+
   test('should remove an item from a non-empty array', () => {
     for (let i = 1; i <= 10; i += 1) {
       array.insert(i * 10);

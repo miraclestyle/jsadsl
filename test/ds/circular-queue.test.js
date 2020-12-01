@@ -1,6 +1,6 @@
 const ds = require('../../lib/ds/index');
 
-const structures = ['circularQueue'];
+const structures = ['circularQueue', 'dynamicCircularQueue'];
 let q = null;
 const n = 10;
 
@@ -15,10 +15,6 @@ describe.each(structures)('%s', (name) => {
 
   test('should report size of 0 for an empty circular queue', () => {
     expect(q.size()).toBe(0);
-  });
-
-  xtest('should find nothing in an empty circular queue', () => {
-    expect(q.find(100)).toBe(-1);
   });
 
   test('should add one item to an empty circular queue', () => {
@@ -44,12 +40,6 @@ describe.each(structures)('%s', (name) => {
     expect(q.size()).toBe(1);
   });
 
-  xtest('should find an index in a circular queue with one item', () => {
-    q.enqueue(100);
-    const index = q.find(100);
-    expect(index).toBe(0);
-  });
-
   test('should add multiple items to an empty circular queue', () => {
     for (let i = 1; i <= 10; i += 1) {
       q.enqueue(i * 10);
@@ -57,6 +47,17 @@ describe.each(structures)('%s', (name) => {
     const copy = [];
     q.forEach((value) => copy.push(value));
     expect(copy).toEqual([10, 20, 30, 40, 50, 60, 70, 80, 90, 100]);
+  });
+
+  test('should not add more items than the set capacity of the circular queue', () => {
+    if (name === 'circularQueue') {
+      for (let i = 1; i <= 12; i += 1) {
+        q.enqueue(i * 10);
+      }
+      const copy = [];
+      q.forEach((value) => copy.push(value));
+      expect(copy).toEqual([10, 20, 30, 40, 50, 60, 70, 80, 90, 100]);
+    }
   });
 
   test('should not remove an item from an empty circular queue', () => {
@@ -68,6 +69,13 @@ describe.each(structures)('%s', (name) => {
     q.enqueue(100);
     q.dequeue();
     expect(q.empty()).toBe(true);
+  });
+
+  test('should get the first item from a non-empty circular queue', () => {
+    q.enqueue(100);
+    q.enqueue(90);
+    q.enqueue(80);
+    expect(q.peek()).toBe(100);
   });
 
   test('should remove an item from a non-empty circular queue', () => {
@@ -113,14 +121,6 @@ describe.each(structures)('%s', (name) => {
     expect(q.empty()).toBe(true);
   });
 
-  xtest('should find a value in a circular queue with multiple items', () => {
-    for (let i = 1; i <= 10; i += 1) {
-      q.enqueue(i * 10);
-    }
-    const index = q.find(50);
-    expect(index).toBe(4);
-  });
-
   test('should iterate over multiple items in a non-empty circular queue', () => {
     for (let i = 1; i <= 10; i += 1) {
       q.enqueue(i * 10);
@@ -132,14 +132,11 @@ describe.each(structures)('%s', (name) => {
     });
   });
 
-  xtest('should update an item in a non-empty circular queue', () => {
+  test('should print multiple items in a non-empty circular queue', () => {
     for (let i = 1; i <= 10; i += 1) {
       q.enqueue(i * 10);
     }
-    q.update(50, 55);
-    const index50 = q.find(50);
-    const index55 = q.find(55);
-    expect(index50).toBe(-1);
-    expect(index55).toBe(4);
+    const queue = '[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]';
+    expect(q.print()).toBe(queue);
   });
 });
