@@ -1,4 +1,5 @@
 const sort = require('../../lib/sort');
+const util = require('../../lib/util');
 
 const sorts = ['keyIndexCounting', 'lsd', 'msd'];
 let array = [];
@@ -10,7 +11,7 @@ const init = (low = 0, high = n, w = s) => {
   for (let i = low; i < high; i += 1) {
     let str = '';
     for (let j = 0; j < w; j += 1) {
-      const r = sort.util.randomInt(97, 123);
+      const r = util.randomInt(97, 123);
       str += String.fromCharCode(r);
     }
     output.push(str);
@@ -69,21 +70,11 @@ describe.each(sorts)('%s sort', (name) => {
     expect(sort.isSorted(array, compare)).toBe(true);
   });
 
-  test('should sort a randomized array of 10,000 items', () => {
+  test('should sort a randomized array of 16,000 items', () => {
     if (name === 'keyIndexCounting') {
-      array = init(0, 10000, 1);
+      array = init(0, 16000, 1);
     } else {
-      array = init(0, 10000);
-    }
-    sort[name](array);
-    expect(sort.isSorted(array)).toBe(true);
-  });
-
-  test('should sort a randomized array of 1,000,000 items', () => {
-    if (name === 'keyIndexCounting') {
-      array = init(0, 1000000, 1);
-    } else {
-      array = init(0, 1000000);
+      array = init(0, 16000);
     }
     sort[name](array);
     expect(sort.isSorted(array)).toBe(true);

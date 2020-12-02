@@ -1,4 +1,5 @@
 const sort = require('../../lib/sort');
+const util = require('../../lib/util');
 
 const sorts = ['repeat'];
 let array = [];
@@ -7,7 +8,7 @@ const n = 10;
 const init = (low = 0, high = n) => {
   const output = [];
   for (let i = low; i < high; i += 1) {
-    output.push(sort.util.randomInt(i, n));
+    output.push(util.randomInt(i, n));
   }
   return output;
 };
@@ -49,22 +50,9 @@ describe.each(sorts)('%s sort', (name) => {
     expect(sort.isSorted(array, compare)).toBe(true);
   });
 
-  test('should sort a randomized array of 10,000 items', () => {
-    array = init(0, 10000);
+  test('should sort a randomized array of 16,000 items', () => {
+    array = init(0, 16000);
     sort[name](array);
     expect(sort.isSorted(array)).toBe(true);
-  });
-
-  test('should sort a randomized array of 1,000,000 items with fast sorts', () => {
-    const fastSorts = new Set([
-      'repeat',
-    ]);
-    if (fastSorts.has(name)) {
-      array = init(0, 1000000);
-      sort[name](array);
-      expect(sort.isSorted(array)).toBe(true);
-    } else {
-      expect(true).toBe(true);
-    }
   });
 });

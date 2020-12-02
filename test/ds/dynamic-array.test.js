@@ -1,4 +1,4 @@
-const ds = require('../../lib/ds/index');
+const ds = require('../../lib/ds');
 
 const structures = ['dynamicArray'];
 let array = null;

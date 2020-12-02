@@ -38,8 +38,8 @@ describe('shuffle', () => {
     expect(sort.isSorted(array, undefined, 3, 8)).toBe(false);
   });
 
-  test('should randomize a sorted array of 10,000 items', () => {
-    array = init(0, 10000);
+  test('should randomize a sorted array of 16,000 items', () => {
+    array = init(0, 16000);
     sort.shuffle(array);
     expect(sort.isSorted(array)).toBe(false);
   });
