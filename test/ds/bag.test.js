@@ -25,7 +25,7 @@ describe.each(structures)('%s', (name) => {
     bag.insert(2);
     bag.insert(1);
     const set = new Set();
-    bag.forEach((node) => set.add(node.value));
+    bag.forEach((value) => set.add(value));
     expect(set.has(1)).toBe(true);
     expect(set.has(2)).toBe(true);
   });
@@ -45,7 +45,7 @@ describe.each(structures)('%s', (name) => {
       bag.insert(i * 10);
     }
     const set = new Set();
-    bag.forEach((node) => set.add(node.value));
+    bag.forEach((value) => set.add(value));
     for (let i = 10; i <= 100; i += 10) {
       expect(set.has(i)).toBe(true);
     }
@@ -69,14 +69,14 @@ describe.each(structures)('%s', (name) => {
       refSet.add(i * 10);
     }
     let set = new Set();
-    bag.forEach((node) => set.add(node.value));
+    bag.forEach((value) => set.add(value));
     for (let i = 10; i <= 100; i += 10) {
       expect(set.has(i)).toBe(true);
     }
     bag.remove(60);
     refSet.delete(60);
     set = new Set();
-    bag.forEach((node) => set.add(node.value));
+    bag.forEach((value) => set.add(value));
     refSet.forEach((value) => {
       expect(set.has(value)).toBe(true);
     });
@@ -89,7 +89,7 @@ describe.each(structures)('%s', (name) => {
       refSet.add(i * 10);
     }
     let set = new Set();
-    bag.forEach((node) => set.add(node.value));
+    bag.forEach((value) => set.add(value));
     for (let i = 10; i <= 100; i += 10) {
       expect(set.has(i)).toBe(true);
     }
@@ -104,7 +104,7 @@ describe.each(structures)('%s', (name) => {
     refSet.delete(10);
     refSet.delete(100);
     set = new Set();
-    bag.forEach((node) => set.add(node.value));
+    bag.forEach((value) => set.add(value));
     refSet.forEach((value) => {
       expect(set.has(value)).toBe(true);
     });
@@ -115,7 +115,7 @@ describe.each(structures)('%s', (name) => {
       bag.insert(i * 10);
     }
     const set = new Set();
-    bag.forEach((node) => set.add(node.value));
+    bag.forEach((value) => set.add(value));
     for (let i = 10; i <= 100; i += 10) {
       expect(set.has(i)).toBe(true);
     }
@@ -131,8 +131,8 @@ describe.each(structures)('%s', (name) => {
       bag.insert(i * 10);
       refSet.add(i * 10);
     }
-    bag.forEach((node) => {
-      expect(refSet.has(node.value)).toBe(true);
+    bag.forEach((value) => {
+      expect(refSet.has(value)).toBe(true);
     });
   });
 });
