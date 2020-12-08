@@ -3,6 +3,7 @@ FROM node:14.15.1
 # Setup new user
 RUN useradd -ms /bin/bash developer
 USER developer
-WORKDIR /home/developer/jsadsl
+WORKDIR /home/developer
+RUN mkdir jsadsl 
 
-COPY --chown=developer:developer . .
+COPY --chown=developer:developer . ./jsadsl
