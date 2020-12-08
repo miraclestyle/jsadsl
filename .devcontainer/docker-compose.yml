@@ -6,4 +6,9 @@ services:
     tty: true
     container_name: node-container
     volumes:
-      - ../:/home/developer/jsadsl
+      - type: volume
+        source: jsadsl
+        target: /home/developer/jsadsl
+
+volumes:
+  jsadsl:
