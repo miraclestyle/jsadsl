@@ -8,6 +8,6 @@ RUN mkdir jsadsl
 
 COPY --chown=developer:developer . ./jsadsl
 
-RUN cd jsadsl/
+WORKDIR /home/developer/jsadsl
 
 RUN npm install
