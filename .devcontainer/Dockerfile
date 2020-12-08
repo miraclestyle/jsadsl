@@ -10,4 +10,4 @@ COPY --chown=developer:developer . ./jsadsl
 
 RUN cd jsadsl
 
-CMD ["npm", "install"]
+RUN npm install
