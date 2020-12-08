@@ -4,10 +4,10 @@ FROM node:14.15.1
 RUN useradd -ms /bin/bash developer
 USER developer
 WORKDIR /home/developer
-RUN ["mkdir", "jsadsl"] 
+RUN mkdir jsadsl 
 
 COPY --chown=developer:developer . ./jsadsl
 
-RUN ["cd", "jsadsl"]
+RUN cd jsadsl
 
-RUN ["npm", "install"]
+CMD ["npm", "install"]
