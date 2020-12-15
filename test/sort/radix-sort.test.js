@@ -1,7 +1,8 @@
 const sort = require('../../lib/sort');
 const util = require('../../lib/util');
 
-const sorts = ['keyIndexCounting', 'lsd', 'msd'];
+const sorts = ['keyIndexCounting', 'lsd', 'msd', 'repeat'];
+const kic = new Set(['keyIndexCounting', 'repeat']);
 let array = [];
 const n = 20;
 const s = 5;
@@ -21,7 +22,7 @@ const init = (low = 0, high = n, w = s) => {
 
 describe.each(sorts)('%s sort', (name) => {
   beforeEach(() => {
-    if (name === 'keyIndexCounting') {
+    if (kic.has(name)) {
       array = init(0, n, 1);
     } else {
       array = init();
@@ -29,7 +30,7 @@ describe.each(sorts)('%s sort', (name) => {
   });
 
   test('should sort a single element array', () => {
-    if (name === 'keyIndexCounting') {
+    if (kic.has(name)) {
       array = init(1, 2, 1);
     } else {
       array = init(1, 2);
@@ -50,8 +51,10 @@ describe.each(sorts)('%s sort', (name) => {
   });
 
   test('should partialy sort an array with custom range', () => {
-    sort[name](array, undefined, 3, 8);
-    expect(sort.isSorted(array, undefined, 3, 8)).toBe(true);
+    if (name !== 'repeat') {
+      sort[name](array, undefined, 3, 8);
+      expect(sort.isSorted(array, undefined, 3, 8)).toBe(true);
+    }
   });
 
   test('should sort an array in descending order', () => {
@@ -71,7 +74,7 @@ describe.each(sorts)('%s sort', (name) => {
   });
 
   test('should sort a randomized array of 16,000 items', () => {
-    if (name === 'keyIndexCounting') {
+    if (kic.has(name)) {
       array = init(0, 16000, 1);
     } else {
       array = init(0, 16000);
