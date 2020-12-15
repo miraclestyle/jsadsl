@@ -1,7 +1,7 @@
 const sort = require('../../lib/sort');
 const util = require('../../lib/util');
 
-const sorts = ['bubble', 'selection', 'insertion', 'shell', 'heap', 'merge', 'quick', 'threeWayQuick'];
+const sorts = ['bubble', 'selection', 'insertion', 'shell', 'heap', 'merge', 'bottomUpMerge', 'quick', 'threeWayQuick'];
 let array = [];
 const n = 10;
 
