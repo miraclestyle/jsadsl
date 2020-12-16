@@ -35,11 +35,6 @@ describe.each(sorts)('%s sort', (name) => {
     expect(sort.isSorted(array)).toBe(true);
   });
 
-  test('should partialy sort an array with custom range', () => {
-    sort[name](array, undefined, 3, 8);
-    expect(sort.isSorted(array, undefined, 3, 8)).toBe(true);
-  });
-
   test('should sort an array in descending order', () => {
     const compare = (a, b) => {
       if (a > b) return -1;

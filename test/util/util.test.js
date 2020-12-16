@@ -15,32 +15,6 @@ describe('defaultCompare', () => {
 });
 
 describe('randomInt', () => {
-  test('should return 0 when argument is 0', () => {
-    const random = util.randomInt(0);
-    // console.log(random);
-    expect(random).toBe(0);
-  });
-
-  test('should return 0 when argument is 1', () => {
-    const random = util.randomInt(1);
-    // console.log(random);
-    expect(random).toBe(0);
-  });
-
-  test('should return between 0 and 1 when argument is 2', () => {
-    const random = util.randomInt(2);
-    // console.log(random);
-    expect(random).toBeGreaterThanOrEqual(0);
-    expect(random).toBeLessThanOrEqual(1);
-  });
-
-  test('should return between 0 and 100 when argument is 101', () => {
-    const random = util.randomInt(101);
-    // console.log(random);
-    expect(random).toBeGreaterThanOrEqual(0);
-    expect(random).toBeLessThanOrEqual(100);
-  });
-
   test('should return 0 when arguments are 0 and 0', () => {
     const random = util.randomInt(0, 0);
     // console.log(random);
