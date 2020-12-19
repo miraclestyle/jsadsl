@@ -3,12 +3,11 @@ const util = require('../../lib/util');
 
 const sorts = ['bubble', 'selection', 'insertion', 'shell', 'heap', 'merge', 'bottomUpMerge', 'quick', 'threeWayQuick'];
 let array = [];
-const n = 100;
 
-const init = (low = 0, high = n) => {
+const init = (count = 100) => {
   const output = [];
-  for (let i = low; i < high; i += 1) {
-    output.push(util.randomInt(i, n));
+  for (let i = 0; i < count; i += 1) {
+    output.push(util.randomInt(i, count));
   }
   return output;
 };
@@ -19,7 +18,7 @@ describe.each(sorts)('%s sort', (name) => {
   });
 
   test('should sort a single element array', () => {
-    array = init(1, 2);
+    array = init(1);
     sort[name](array);
     expect(sort.isSorted(array)).toBe(true);
   });
@@ -57,7 +56,7 @@ describe.each(sorts)('%s sort', (name) => {
   });
 
   test('should sort a randomized array of 16,000 items', () => {
-    array = init(0, 16000);
+    array = init(16000);
     sort[name](array);
     expect(sort.isSorted(array)).toBe(true);
   });

@@ -3,15 +3,16 @@ const util = require('../../lib/util');
 
 const sorts = ['keyIndexCounting', 'lsd', 'msd', 'quickRadix', 'repeat'];
 const kic = new Set(['keyIndexCounting', 'repeat']);
+const msd = new Set(['msd']);
 let array = [];
-const n = 20;
-const s = 5;
 
-const init = (low = 0, high = n, w = s) => {
+const init = (count = 100, w = 5) => {
   const output = [];
-  for (let i = low; i < high; i += 1) {
+  for (let i = 0; i < count; i += 1) {
     let str = '';
-    for (let j = 0; j < w; j += 1) {
+    let width = w;
+    width = w === -1 ? util.randomInt(1, 10) : w;
+    for (let j = 0; j < width; j += 1) {
       const r = util.randomInt(97, 123);
       str += String.fromCharCode(r);
     }
@@ -23,7 +24,9 @@ const init = (low = 0, high = n, w = s) => {
 describe.each(sorts)('%s sort', (name) => {
   beforeEach(() => {
     if (kic.has(name)) {
-      array = init(0, n, 1);
+      array = init(20, 1);
+    } else if (msd.has(name)) {
+      array = init(20, -1);
     } else {
       array = init();
     }
@@ -31,9 +34,11 @@ describe.each(sorts)('%s sort', (name) => {
 
   test('should sort a single element array', () => {
     if (kic.has(name)) {
-      array = init(1, 2, 1);
+      array = init(1, 1);
+    } else if (msd.has(name)) {
+      array = init(1, -1);
     } else {
-      array = init(1, 2);
+      array = init(1);
     }
     sort[name](array);
     expect(sort.isSorted(array)).toBe(true);
@@ -68,9 +73,11 @@ describe.each(sorts)('%s sort', (name) => {
 
   test('should sort a randomized array of 16,000 items', () => {
     if (kic.has(name)) {
-      array = init(0, 16000, 1);
+      array = init(16000, 1);
+    } else if (msd.has(name)) {
+      array = init(16000, -1);
     } else {
-      array = init(0, 16000);
+      array = init(16000);
     }
     sort[name](array);
     expect(sort.isSorted(array)).toBe(true);
