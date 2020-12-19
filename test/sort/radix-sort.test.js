@@ -2,8 +2,9 @@ const sort = require('../../lib/sort');
 const util = require('../../lib/util');
 
 const sorts = ['keyIndexCounting', 'lsd', 'msd', 'quickRadix', 'repeat'];
-const kic = new Set(['keyIndexCounting', 'repeat']);
-const msd = new Set(['msd']);
+const single = new Set(['keyIndexCounting']);
+const fixed = new Set(['lsd', 'repeat']);
+const variable = new Set(['msd', 'quickRadix']);
 let array = [];
 
 const init = (count = 100, w = 5) => {
@@ -23,23 +24,15 @@ const init = (count = 100, w = 5) => {
 
 describe.each(sorts)('%s sort', (name) => {
   beforeEach(() => {
-    if (kic.has(name)) {
-      array = init(20, 1);
-    } else if (msd.has(name)) {
-      array = init(20, -1);
-    } else {
-      array = init();
-    }
+    if (single.has(name)) array = init(100, 1);
+    if (variable.has(name)) array = init(100, -1);
+    if (fixed.has(name)) array = init();
   });
 
   test('should sort a single element array', () => {
-    if (kic.has(name)) {
-      array = init(1, 1);
-    } else if (msd.has(name)) {
-      array = init(1, -1);
-    } else {
-      array = init(1);
-    }
+    if (single.has(name)) array = init(1, 1);
+    if (variable.has(name)) array = init(1, -1);
+    if (fixed.has(name)) array = init(1);
     sort[name](array);
     expect(sort.isSorted(array)).toBe(true);
   });
@@ -61,24 +54,39 @@ describe.each(sorts)('%s sort', (name) => {
       if (a < b) return 1;
       return 0;
     };
-    const transform = (value, index) => {
+    const singleTransform = (value, index) => {
       if (index >= value.length) return -1;
       const reference = ('z').charCodeAt(0);
       const code = value.charCodeAt(index);
       return reference - code;
     };
+    const msdTransform = (value, index) => {
+      const reference = ('z').charCodeAt(0);
+      const min = ('A').charCodeAt(0);
+      const overflow = reference - min;
+      if (index >= value.length) return overflow;
+      const code = value.charCodeAt(index);
+      return reference - code;
+    };
+    const quickRadixTransform = (value, index) => {
+      const reference = ('z').charCodeAt(0);
+      if (index >= value.length) return reference;
+      const code = value.charCodeAt(index);
+      return reference - code;
+    };
+    let transform;
+    if (single.has(name)) transform = singleTransform;
+    if (fixed.has(name)) transform = singleTransform;
+    if (name === 'msd') transform = msdTransform;
+    if (name === 'quickRadix') transform = quickRadixTransform;
     sort[name](array, transform);
     expect(sort.isSorted(array, compare)).toBe(true);
   });
 
   test('should sort a randomized array of 16,000 items', () => {
-    if (kic.has(name)) {
-      array = init(16000, 1);
-    } else if (msd.has(name)) {
-      array = init(16000, -1);
-    } else {
-      array = init(16000);
-    }
+    if (single.has(name)) array = init(16000, 1);
+    if (variable.has(name)) array = init(16000, -1);
+    if (fixed.has(name)) array = init(16000);
     sort[name](array);
     expect(sort.isSorted(array)).toBe(true);
   });
