@@ -1,7 +1,7 @@
 const sort = require('../../lib/sort');
 const util = require('../../lib/util');
 
-const sorts = ['keyIndexCounting', 'lsd', 'msd', 'quickRadix', 'repeat'];
+const sorts = ['keyIndexCounting', 'lsd', 'msd', 'quickRadix'];
 const single = new Set(['keyIndexCounting']);
 const fixed = new Set(['lsd']);
 const variable = new Set(['msd', 'quickRadix', 'repeat']);
