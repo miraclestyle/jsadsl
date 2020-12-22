@@ -3,8 +3,8 @@ const util = require('../../lib/util');
 
 const sorts = ['keyIndexCounting', 'lsd', 'msd', 'quickRadix', 'repeat'];
 const single = new Set(['keyIndexCounting']);
-const fixed = new Set(['lsd']);
-const variable = new Set(['msd', 'quickRadix', 'repeat']);
+const fixed = new Set(['lsd', 'repeat']);
+const variable = new Set(['msd', 'quickRadix']);
 let array = [];
 
 const init = (count = 100, w = 5) => {
