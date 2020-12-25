@@ -1,5 +1,6 @@
 const ds = require('../../lib/ds');
 
+const structures = ['unionFind', 'repeat'];
 let n;
 let unionFind;
 
@@ -7,10 +8,10 @@ const random = (low, high) => (
   low + Math.floor(Math.random() * (high - low))
 );
 
-describe('unionFind', () => {
+describe.each(structures)('%s', (name) => {
   beforeEach(() => {
     n = Math.floor(Math.random() * 1000);
-    unionFind = ds.unionFind(n);
+    unionFind = ds[name](n);
   });
 
   test('should generate connected cluster of random size', () => {
