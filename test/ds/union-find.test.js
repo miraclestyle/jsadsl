@@ -1,6 +1,6 @@
 const ds = require('../../lib/ds');
 
-const structures = ['unionFind', 'repeat'];
+const structures = ['unionFind'];
 let n;
 let unionFind;
 
