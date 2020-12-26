@@ -1,6 +1,6 @@
 const ds = require('../../lib/ds');
 
-const structures = ['linkedStack', 'repeat'];
+const structures = ['linkedStack', 'arrayStack', 'repeat'];
 let stack = null;
 
 describe.each(structures)('%s', (name) => {
