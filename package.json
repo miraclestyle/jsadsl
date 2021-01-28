@@ -4,7 +4,10 @@
   "description": "JavaScript Algorithms and Data Structures Library",
   "main": "index.js",
   "scripts": {
-    "test": "jest --collectCoverage"
+    "test": "jest --collectCoverage",
+    "test-util": "jest test/util --collectCoverage",
+    "test-sort": "jest test/sort --collectCoverage",
+    "test-ds": "jest test/ds --collectCoverage"
   },
   "repository": {
     "type": "git",
