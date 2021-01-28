@@ -7,10 +7,10 @@ let arrays = {};
 const generate = () => {
   const random = [];
   const sorted = [];
-  const start = util.randomInt(0, 25);
-  const end = util.randomInt(start, 26);
+  const start = util.randomInt(0, 13);
+  const end = util.randomInt(13, 26);
   const jump = util.randomInt(start > 0 ? start : 1, end);
-  for (let i = start; i <= end; i += jump) {
+  for (let i = 65 + start; i <= 65 + end; i += jump) {
     random.push(String.fromCharCode(i));
     sorted.push(String.fromCharCode(i));
   }
@@ -169,6 +169,15 @@ describe.each(structures)('%s', (name) => {
     const { length } = arrays.sorted;
     const index = Math.floor(length / 2);
     const key = arrays.sorted[index];
+    expect(bst.get(key)).toBe(key);
+    bst.remove(key);
+    expect(bst.get(key)).toBeNull();
+  });
+
+  test('should test the remove method of a non-empty bst', () => {
+    const { length } = arrays.random;
+    const index = 0;
+    const key = arrays.random[index];
     expect(bst.get(key)).toBe(key);
     bst.remove(key);
     expect(bst.get(key)).toBeNull();
