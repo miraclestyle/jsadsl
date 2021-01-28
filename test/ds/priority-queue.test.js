@@ -1,5 +1,4 @@
-const ds = require('../../lib/ds');
-const util = require('../../lib/util');
+const { ds, util } = require('../../lib');
 
 const structures = ['priorityQueue'];
 let array = [];

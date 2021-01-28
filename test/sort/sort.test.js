@@ -1,5 +1,4 @@
-const sort = require('../../lib/sort');
-const util = require('../../lib/util');
+const { sort, util } = require('../../lib');
 
 const sorts = ['bubble', 'selection', 'insertion', 'shell', 'heap', 'merge', 'bottomUpMerge', 'quick', 'threeWayQuick', 'repeat'];
 let array = [];

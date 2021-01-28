@@ -1,4 +1,4 @@
-const sort = require('../../lib/sort');
+const { sort } = require('../../lib');
 
 let array = [];
 

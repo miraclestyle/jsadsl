@@ -1,4 +1,4 @@
-const ds = require('../../lib/ds');
+const { ds } = require('../../lib');
 
 const structures = ['linkedStack', 'arrayStack', 'repeat'];
 let stack = null;

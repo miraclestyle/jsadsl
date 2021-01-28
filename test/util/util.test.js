@@ -1,4 +1,4 @@
-const util = require('../../lib/util');
+const { util } = require('../../lib');
 
 describe('defaultCompare', () => {
   test('should return less than zero when "a" > "b"', () => {
