@@ -1,6 +1,6 @@
 const { ds, sort, util } = require('../../lib');
 
-const structures = ['BST'];
+const structures = ['BST', 'RBBST'];
 let bst = null;
 let arrays = {};
 
