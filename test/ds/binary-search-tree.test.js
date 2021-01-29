@@ -35,12 +35,35 @@ describe.each(structures)('%s', (name) => {
     bst = ds[name]();
   });
 
+  test('should report true for the empty method of an empty bst', () => {
+    expect(bst.empty()).toBe(true);
+  });
+
   test('should report 0 for the size method of an empty bst', () => {
     expect(bst.size()).toBe(0);
   });
 
+  test('should report false for the contains method of an empty bst', () => {
+    expect(bst.contains('A')).toBe(false);
+  });
+
   test('should report null for the get method of an empty bst', () => {
     expect(bst.get('A')).toBeNull();
+  });
+
+  test('should throw an error for invoking the get method with null key on an empty bst', () => {
+    const getNull = () => (bst.get(null));
+    expect(getNull).toThrow(new Error('The key can not be null or undefined!'));
+  });
+
+  test('should throw an error for invoking the get method with undefined key on an empty bst', () => {
+    const getUndefined = () => (bst.get(undefined));
+    expect(getUndefined).toThrow(new Error('The key can not be null or undefined!'));
+  });
+
+  test('should throw an error for invoking the get method without a key on an empty bst', () => {
+    const get = () => (bst.get());
+    expect(get).toThrow(new Error('The key can not be null or undefined!'));
   });
 
   test('should report null for the min method of an empty bst', () => {
@@ -106,9 +129,20 @@ describe.each(structures)('%s', (name) => {
     populate(bst, arrays.random);
   });
 
+  test('should test the empty method of a non-empty bst', () => {
+    expect(bst.empty()).toBe(false);
+  });
+
   test('should test the size method of a non-empty bst', () => {
     const { length } = arrays.random;
     expect(bst.size()).toBe(length);
+  });
+
+  test('should test the contains method of a non-empty bst', () => {
+    const { length } = arrays.sorted;
+    const index = Math.floor(length / 2);
+    const key = arrays.sorted[index];
+    expect(bst.contains(key)).toBe(true);
   });
 
   test('should test the get method of a non-empty bst', () => {
@@ -240,8 +274,8 @@ describe.each(structures)('%s', (name) => {
   beforeEach(() => {
     bst = ds[name]();
     arrays = {
-      random: ['S', 'E', 'X', 'A', 'R', 'U', 'C', 'H', 'M'],
-      sorted: ['A', 'C', 'E', 'H', 'M', 'R', 'S', 'U', 'X'],
+      random: ['S', 'E', 'X', 'A', 'R', 'U', 'C', 'H', 'M', 'L', 'P'],
+      sorted: ['A', 'C', 'E', 'H', 'L', 'M', 'P', 'R', 'S', 'U', 'X'],
     };
     populate(bst, arrays.random);
   });
@@ -299,5 +333,21 @@ describe.each(structures)('%s', (name) => {
     expect(bst.get(key)).toBeNull();
     bst.remove(key);
     expect(bst.get(key)).toBeNull();
+  });
+
+  test('should test the rangeCount method of a non-empty bst', () => {
+    expect(bst.rangeCount('E', 'S')).toBe(7);
+    expect(bst.rangeCount('E', 'T')).toBe(7);
+  });
+
+  test('should test the rangeCount method of a non-empty bst', () => {
+    const expectedTight = ['E', 'H', 'L', 'M', 'P', 'R', 'S'];
+    const expectedLoose = ['H', 'L', 'M', 'P', 'R', 'S'];
+    let range = [];
+    bst.rangeSearch('E', 'S', node => range.push(node.key));
+    expect(range).toEqual(expectedTight);
+    range = [];
+    bst.rangeSearch('F', 'T', node => range.push(node.key));
+    expect(range).toEqual(expectedLoose);
   });
 });
