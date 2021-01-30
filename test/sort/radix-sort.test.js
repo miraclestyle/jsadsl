@@ -1,9 +1,11 @@
-const { sort, util } = require('../../lib');
+const { sort, util, repeat } = require('../../lib');
 
-const sorts = ['keyIndexCounting', 'lsd', 'msd', 'quickRadix'];
+sort.repeat = repeat;
+
+const sorts = ['keyIndexCounting', 'lsd', 'msd', 'quickRadix', 'repeat'];
 const single = new Set(['keyIndexCounting']);
 const fixed = new Set(['lsd']);
-const variable = new Set(['msd', 'quickRadix']);
+const variable = new Set(['msd', 'quickRadix', 'repeat']);
 let array = [];
 
 const init = (count = 100, w = 5) => {
@@ -61,22 +63,22 @@ describe.each(sorts)('%s sort', (name) => {
     };
     const msdTransform = (value, index) => {
       const reference = ('z').charCodeAt(0);
-      const min = ('A').charCodeAt(0);
+      const min = ('a').charCodeAt(0);
       const overflow = reference - min;
-      if (index >= value.length) return overflow;
+      if (index >= value.length) return overflow + 1;
       const code = value.charCodeAt(index);
       return reference - code;
     };
     const quickRadixTransform = (value, index) => {
       const reference = ('z').charCodeAt(0);
-      if (index >= value.length) return reference;
+      if (index >= value.length) return reference + 1;
       const code = value.charCodeAt(index);
       return reference - code;
     };
     let transform;
     if (single.has(name)) transform = singleTransform;
     if (fixed.has(name)) transform = singleTransform;
-    if (name === 'msd') transform = msdTransform;
+    if (variable.has(name)) transform = msdTransform;
     if (name === 'quickRadix') transform = quickRadixTransform;
     sort[name](array, transform);
     expect(sort.isSorted(array, compare)).toBe(true);
