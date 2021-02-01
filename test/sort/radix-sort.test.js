@@ -49,7 +49,7 @@ describe.each(sorts)('%s sort', (name) => {
     expect(sort.isSorted(array)).toBe(true);
   });
 
-  test('should sort an array in descending order', () => {
+  xtest('should sort an array in descending order', () => {
     const compare = (a, b) => {
       if (a > b) return -1;
       if (a < b) return 1;
