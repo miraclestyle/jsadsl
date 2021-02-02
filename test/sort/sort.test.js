@@ -27,7 +27,7 @@ const composeCases = (names, arrayConfigs) => {
 };
 
 const buildConfigs = () => {
-  const names = ['bubble', 'selection', 'insertion', 'shell', 'heap', 'merge', 'bottomUpMerge', 'quick', 'threeWayQuick'];
+  const names = ['bubble', 'selection', 'insertion', 'shell', 'heap', 'merge', 'bottomUpMerge', 'quick', 'threeWayQuick', 'repeat'];
   const configs = [
     ['should sort an empty array', 0, false],
     ['should sort an array of 1 item', 1, false],
