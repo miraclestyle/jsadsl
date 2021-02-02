@@ -1,4 +1,6 @@
-const { sort } = require('../../lib');
+const { sort, repeat } = require('../../lib');
+
+sort.isSorted = repeat;
 
 let array = [];
 
