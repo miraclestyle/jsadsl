@@ -7,7 +7,8 @@
     "test": "jest --collectCoverage",
     "test-util": "jest test/util --collectCoverage",
     "test-sort": "jest test/sort --collectCoverage",
-    "test-ds": "jest test/ds --collectCoverage"
+    "test-ds": "jest test/ds --collectCoverage",
+    "test-search": "jest test/search --collectCoverage"
   },
   "repository": {
     "type": "git",
