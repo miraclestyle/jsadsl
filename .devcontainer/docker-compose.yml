@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  test:
+  app:
     build:
       context: ../
       dockerfile: .devcontainer/Dockerfile
@@ -11,7 +11,7 @@ services:
     volumes:
       - type: volume
         source: jsadsl_volume
-        target: /home/developer/jsadsl
+        target: /home/developer/app
 
 volumes:
   jsadsl_volume:

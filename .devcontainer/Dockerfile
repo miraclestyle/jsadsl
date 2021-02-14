@@ -4,10 +4,10 @@ FROM node:14.15.1
 RUN useradd -ms /bin/bash developer
 USER developer
 WORKDIR /home/developer
-RUN mkdir jsadsl 
+RUN mkdir app
 
-COPY --chown=developer:developer . ./jsadsl
+COPY --chown=developer:developer . ./app
 
-WORKDIR /home/developer/jsadsl
+WORKDIR /home/developer/app
 
 RUN npm install
