@@ -2,7 +2,7 @@ const { ds, repeat } = require('../../lib');
 
 ds.repeat = repeat;
 
-const structures = ['linkedStack', 'arrayStack', 'repeat'];
+const structures = ['linkedStack', 'arrayStack'];
 let stack = null;
 
 describe.each(structures)('%s', (name) => {

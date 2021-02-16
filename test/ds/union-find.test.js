@@ -1,6 +1,8 @@
-const { ds } = require('../../lib');
+const { ds, repeat } = require('../../lib');
 
-const structures = ['unionFind'];
+ds.repeat = repeat;
+
+const structures = ['unionFind', 'repeat'];
 let n;
 let unionFind;
 
