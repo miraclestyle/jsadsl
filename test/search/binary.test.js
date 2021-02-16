@@ -2,7 +2,7 @@ const { search, repeat } = require('../../lib');
 
 search.repeat = repeat;
 
-const searhes = ['binary', 'repeat'];
+const searhes = ['binary'];
 
 let array = [];
 
