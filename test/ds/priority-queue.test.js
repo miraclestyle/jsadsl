@@ -1,6 +1,8 @@
-const { ds, util } = require('../../lib');
+const { ds, util, repeat } = require('../../lib');
 
-const structures = ['priorityQueue'];
+ds.repeat = repeat;
+
+const structures = ['priorityQueue', 'repeat'];
 let array = [];
 let pq = null;
 const n = 100;
