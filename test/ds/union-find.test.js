@@ -2,7 +2,7 @@ const { ds, repeat } = require('../../lib');
 
 ds.repeat = repeat;
 
-const structures = ['unionFind'];
+const structures = ['unionFind', 'repeat'];
 let n;
 let unionFind;
 
