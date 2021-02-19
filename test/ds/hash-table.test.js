@@ -1,6 +1,6 @@
 const { ds } = require('../../lib');
 
-const structures = ['hashTable'];
+const structures = ['separateChainingHashTable'];
 let ht = null;
 
 describe.each(structures)('%s', (name) => {
