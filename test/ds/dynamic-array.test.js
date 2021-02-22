@@ -1,6 +1,6 @@
 const { ds } = require('../../lib');
 
-const structures = ['dynamicArray'];
+const structures = ['DynamicArray'];
 let array = null;
 
 describe.each(structures)('%s', (name) => {

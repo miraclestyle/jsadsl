@@ -1,6 +1,6 @@
 const { ds } = require('../../lib');
 
-const structures = ['singlyLinkedList', 'doublyLinkedList'];
+const structures = ['SinglyLinkedList', 'DoublyLinkedList'];
 let list = null;
 
 describe.each(structures)('%s', (name) => {

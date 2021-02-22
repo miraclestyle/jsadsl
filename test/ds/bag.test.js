@@ -1,6 +1,6 @@
 const { ds } = require('../../lib');
 
-const structures = ['linkedBag', 'arrayBag'];
+const structures = ['LinkedBag', 'ArrayBag'];
 let bag = null;
 
 describe.each(structures)('%s', (name) => {

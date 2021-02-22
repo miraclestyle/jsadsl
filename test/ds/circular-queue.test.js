@@ -1,6 +1,6 @@
 const { ds } = require('../../lib');
 
-const structures = ['circularQueue', 'dynamicCircularQueue'];
+const structures = ['CircularQueue', 'DynamicCircularQueue'];
 let q = null;
 const n = 10;
 

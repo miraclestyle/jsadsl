@@ -2,7 +2,7 @@ const { ds, util, repeat } = require('../../lib');
 
 ds.repeat = repeat;
 
-const structures = ['priorityQueue'];
+const structures = ['PriorityQueue'];
 let array = [];
 let pq = null;
 const n = 100;
