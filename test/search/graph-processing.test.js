@@ -1,107 +1,74 @@
-const fs = require('fs');
-const readline = require('readline');
 const path = require('path');
 const {
   describe,
   expect,
   test,
+  beforeAll,
   beforeEach,
 } = require('@jest/globals');
-const { ds, repeat } = require('../../lib');
+const { search, repeat } = require('../../lib');
 
-ds.repeat = repeat;
+const { Graph } = require('./data');
 
-let graph = null;
+search.repeat = repeat;
 
-const composeCases = (names, arrayConfigs) => {
-  const output = [];
-  for (let i = 0; i < names.length; i += 1) {
-    for (let j = 0; j < arrayConfigs.length; j += 1) {
-      output.push([names[i], ...arrayConfigs[j]]);
-    }
-  }
-  return output;
-};
-
-const buildConfig = (filePath, directed) => (
-  new Promise((resolve, reject) => {
-    const config = [];
-    const edges = [];
-    let position = 0;
-    const file = fs.createReadStream(filePath);
-    const lines = readline.createInterface({
-      input: file,
-      crlfDelay: Infinity,
-    });
-    lines.on('line', (line) => {
-      const tuple = line.toString().split(' ').map((item) => (Number(item)));
-      if (position === 0) config.push(tuple[0]);
-      else if (position === 1) config.push(directed);
-      else if (position > 1) edges.push(tuple);
-      position += 1;
-    });
-    lines.on('close', () => {
-      config.push(edges);
-      if (config.length === 0) reject(new Error('buildConfig failed.'));
-      else resolve(config);
-    });
-  })
+const getFilePath = (fileName) => (
+  path.resolve('.', 'test', 'search', 'data', fileName)
 );
 
-const buildConfigs = () => (
+const buildGraphs = () => (
   new Promise((resolve, reject) => {
-    const names = ['Graph'];
-    // const configs = [];
-    const files = [
-      path.resolve('.', 'test', 'ds', 'data', 'tinyGraph.txt'),
+    const cases = [
+      {
+        name: 'GraphConnectedComponentsTiny',
+        algo: 'GraphConnectedComponents',
+        file: getFilePath('tinyGraph.txt'),
+        directed: false,
+        graph: null,
+      },
     ];
-    const promises = files.map((filePath) => (buildConfig(filePath, false)));
+    const promises = cases.map((e) => (Graph(e.file, e.directed)));
     Promise.all(promises)
-      .then((configs) => (resolve(composeCases(names, configs))))
+      .then((results) => {
+        const options = cases.map((e, i) => {
+          e.graph = results[i];
+          return e;
+        });
+        resolve(options);
+      })
       .catch((error) => (reject(error)));
   })
 );
 
-const buildConfigsSync = () => {
-  const names = ['Graph'];
-  const configs = [
-    [13,
-      false,
-      [
-        [0, 5], [4, 3],
-        [0, 1], [9, 12],
-        [6, 4], [5, 4],
-        [0, 2], [11, 12],
-        [9, 10], [0, 6],
-        [7, 8], [9, 11],
-        [5, 3],
-      ],
-    ],
-  ];
-  return composeCases(names, configs);
-};
+let graphs;
 
-const init = (name, v, edges, directed = false) => {
-  const output = ds[name](v, directed);
-  for (let i = 0; i < edges.length; i += 1) {
-    output.addEdge(...edges[i]);
-  }
-  return output;
-};
-const names = ['Graph'];
+beforeAll(() => {
+  buildGraphs().then((options) => {
+    graphs = options;
+  });
+});
 
-// beforeAll(() => (buildConfigs().then((results) => {
-//   cases = results;
-//   console.log(cases);
-//   return cases;
-// })));
+let algo = null;
+describe('GraphConnectedComponents', () => {
+  beforeEach(() => {
+    algo = search[graphs[0].algo](graphs[0].graph);
+  });
 
-// describe.each(names)('%s', (name) => {
-//   beforeEach(() => {
-//     graph = ds[name](13, false);
-//   });
+  test('should verify count method on GraphConnectedComponents', () => {
+    expect(algo.count()).toBe(3);
+  });
 
-//   test('should verify V method on a non-empty graph', () => {
-//     expect(graph.V()).toBe(13);
-//   });
-// });
+  test('should verify component method on GraphConnectedComponents', () => {
+    expect(algo.component(5)).toBe(0);
+    expect(algo.component(7)).toBe(1);
+    expect(algo.component(11)).toBe(2);
+  });
+
+  test('should verify connected method on GraphConnectedComponents', () => {
+    expect(algo.connected(0, 1)).toBe(true);
+    expect(algo.connected(3, 6)).toBe(true);
+    expect(algo.connected(7, 8)).toBe(true);
+    expect(algo.connected(10, 12)).toBe(true);
+    expect(algo.connected(5, 10)).toBe(false);
+  });
+});
