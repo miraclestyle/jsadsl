@@ -1,10 +1,16 @@
 const fs = require('fs');
 const readline = require('readline');
+const path = require('path');
 
 const { ds } = require('../../../lib');
 
-const GraphFromFile = (filePath, directed) => (
+const getFilePath = (fileName) => (
+  path.resolve('.', 'test', 'search', 'data', fileName)
+);
+
+const GraphFromFile = (fileName, directed) => (
   new Promise((resolve, reject) => {
+    const filePath = getFilePath(fileName);
     const lines = readline.createInterface({
       input: fs.createReadStream(filePath),
       crlfDelay: Infinity,

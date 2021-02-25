@@ -1,4 +1,3 @@
-const path = require('path');
 const {
   describe,
   expect,
@@ -7,14 +6,9 @@ const {
   beforeEach,
 } = require('@jest/globals');
 const { search, repeat } = require('../../lib');
-
 const { Graph } = require('./data');
 
 search.repeat = repeat;
-
-const getFilePath = (fileName) => (
-  path.resolve('.', 'test', 'search', 'data', fileName)
-);
 
 const buildGraphs = () => (
   new Promise((resolve, reject) => {
@@ -22,7 +16,7 @@ const buildGraphs = () => (
       {
         name: 'GraphConnectedComponentsTiny',
         algo: 'GraphConnectedComponents',
-        file: getFilePath('tinyGraph.txt'),
+        file: 'tinyGraph.txt',
         directed: false,
         graph: null,
       },
@@ -42,11 +36,12 @@ const buildGraphs = () => (
 
 let graphs;
 
-beforeAll(() => {
+beforeAll(() => (
   buildGraphs().then((options) => {
     graphs = options;
-  });
-});
+    return graphs;
+  })
+));
 
 let algo = null;
 describe('GraphConnectedComponents', () => {
