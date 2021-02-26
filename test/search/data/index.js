@@ -2,7 +2,6 @@ const fs = require('fs');
 const readline = require('readline');
 const path = require('path');
 const { ds } = require('../../../lib');
-const cases = require('./config');
 
 const getFilePath = (fileName) => (
   path.resolve('.', 'test', 'search', 'data', fileName)
@@ -36,23 +35,4 @@ const GraphFromFile = (fileName, directed) => (
   })
 );
 
-const BuildGraphs = () => (
-  new Promise((resolve, reject) => {
-    const keys = Object.keys(cases);
-    const promises = keys.map((key) => (
-      GraphFromFile(cases[key].file, cases[key].directed)
-    ));
-    Promise.all(promises)
-      .then((results) => {
-        keys.forEach((key, index) => {
-          const cfg = cases[key];
-          cfg.graph = results[index];
-          cases[key] = cfg;
-        });
-        resolve(cases);
-      })
-      .catch((error) => (reject(error)));
-  })
-);
-
-module.exports.Graphs = BuildGraphs;
+module.exports.Graph = GraphFromFile;
