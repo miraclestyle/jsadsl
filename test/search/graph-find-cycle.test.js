@@ -2,8 +2,6 @@ const {
   describe,
   expect,
   test,
-  beforeAll,
-  beforeEach,
 } = require('@jest/globals');
 const { search, repeat } = require('../../lib');
 const { Graph } = require('./data');
@@ -30,8 +28,7 @@ describe.each(names)('%s', (name) => {
         s += (cycle.pop()).toString();
         if (!cycle.empty()) s += '->';
       }
-      const ref = '3->5->4->3';
-      expect(s).toBe(ref);
+      expect(s).toBe('3->5->4->3');
       done();
     });
   });

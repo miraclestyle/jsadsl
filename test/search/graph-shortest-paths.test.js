@@ -3,7 +3,6 @@ const {
   expect,
   test,
   beforeAll,
-  beforeEach,
 } = require('@jest/globals');
 const { search, repeat } = require('../../lib');
 const { Graph } = require('./data');
@@ -22,12 +21,6 @@ describe.each(names)('%s Multiple Sources', (name) => {
       return algo;
     })
   ));
-
-  test('should verify hasPath method', () => {
-    expect(algo.hasPath(4)).toBe(true);
-    expect(algo.hasPath(5)).toBe(true);
-    expect(algo.hasPath(12)).toBe(true);
-  });
 
   test('should verify getParent method', () => {
     expect(algo.getParent(4)).toBe(6);
@@ -70,11 +63,6 @@ describe.each(names)('%s Single Source', (name) => {
       return algo;
     })
   ));
-
-  test('should verify hasPath method', () => {
-    expect(algo.hasPath(2)).toBe(true);
-    expect(algo.hasPath(12)).toBe(false);
-  });
 
   test('should verify getParent method', () => {
     expect(algo.getParent(2)).toBe(4);

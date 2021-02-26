@@ -3,7 +3,6 @@ const {
   expect,
   test,
   beforeAll,
-  beforeEach,
 } = require('@jest/globals');
 const { search, repeat } = require('../../lib');
 const { Graph } = require('./data');
