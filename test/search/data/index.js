@@ -1,8 +1,8 @@
 const fs = require('fs');
 const readline = require('readline');
 const path = require('path');
-
 const { ds } = require('../../../lib');
+const cases = require('./config');
 
 const getFilePath = (fileName) => (
   path.resolve('.', 'test', 'search', 'data', fileName)
@@ -38,18 +38,6 @@ const GraphFromFile = (fileName, directed) => (
 
 const BuildGraphs = () => (
   new Promise((resolve, reject) => {
-    const cases = {
-      tinyGraph: {
-        file: 'tinyGraph.txt',
-        directed: false,
-        graph: null,
-      },
-      tinyDigraph: {
-        file: 'tinyDigraph.txt',
-        directed: true,
-        graph: null,
-      },
-    };
     const keys = Object.keys(cases);
     const promises = keys.map((key) => (
       GraphFromFile(cases[key].file, cases[key].directed)
