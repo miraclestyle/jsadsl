@@ -11,6 +11,14 @@ search.repeat = repeat;
 const names = ['GraphTopologicalSort'];
 
 describe.each(names)('%s', (name) => {
+  test('should not do topological sort on a given graph', (done) => {
+    Graph('tinyDigraph.txt', true).then((graph) => {
+      const sort = search[name](graph);
+      expect(sort).toBe(null);
+      done();
+    });
+  });
+
   test('should do topological sort on a given graph', (done) => {
     Graph('tinyDAG.txt', true).then((graph) => {
       const sort = search[name](graph);
