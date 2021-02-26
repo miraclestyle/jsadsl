@@ -19,7 +19,8 @@ const GraphFromFile = (fileName, directed) => (
     let row = 0;
     const edges = [];
     lines.on('line', (line) => {
-      const tuple = line.toString().split(' ').map((e) => (Number(e)));
+      const tuple = line.toString().replace(/\s+/g, ' ').trim().split(' ')
+        .map((e) => (Number(e)));
       if (row === 0) [v] = [...tuple];
       else if (row > 1) edges.push(tuple);
       row += 1;
