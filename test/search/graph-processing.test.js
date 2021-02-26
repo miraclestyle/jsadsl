@@ -6,57 +6,14 @@ const {
   beforeEach,
 } = require('@jest/globals');
 const { search, repeat } = require('../../lib');
-const { Graph } = require('./data');
+const { Graphs } = require('./data');
 
 search.repeat = repeat;
-
-const buildGraphs = () => (
-  new Promise((resolve, reject) => {
-    const cases = {
-      GraphConnectedComponents: [
-        {
-          file: 'tinyGraph.txt',
-          directed: false,
-          graph: null,
-        },
-      ],
-      GraphShortestPaths: [
-        {
-          file: 'tinyDigraph.txt',
-          directed: true,
-          graph: null,
-        },
-      ],
-    };
-    const keys = Object.keys(cases);
-    const promises = [];
-    keys.forEach((key) => {
-      const graphs = cases[key];
-      graphs.forEach((cfg) => {
-        promises.push(Graph(cfg.file, cfg.directed));
-      });
-    });
-    Promise.all(promises)
-      .then((results) => {
-        let i = 0;
-        keys.forEach((key) => {
-          const graphs = cases[key];
-          cases[key] = graphs.map((cfg) => {
-            cfg.graph = results[i];
-            i += 1;
-            return cfg;
-          });
-        });
-        resolve(cases);
-      })
-      .catch((error) => (reject(error)));
-  })
-);
 
 let graphs;
 
 beforeAll(() => (
-  buildGraphs().then((options) => {
+  Graphs().then((options) => {
     graphs = options;
     return graphs;
   })
@@ -65,7 +22,7 @@ beforeAll(() => (
 let algo = null;
 describe('GraphConnectedComponents', () => {
   beforeEach(() => {
-    const { graph } = graphs.GraphConnectedComponents[0];
+    const { graph } = graphs.tinyGraph;
     algo = search.GraphConnectedComponents(graph);
   });
 
@@ -91,7 +48,7 @@ describe('GraphConnectedComponents', () => {
 describe('GraphShortestPaths Multiple Sources', () => {
   beforeAll(() => {
     const sources = [1, 7, 10];
-    const { graph } = graphs.GraphShortestPaths[0];
+    const { graph } = graphs.tinyDigraph;
     algo = search.GraphShortestPaths(graph, sources);
   });
 
@@ -134,11 +91,10 @@ describe('GraphShortestPaths Multiple Sources', () => {
   });
 });
 
-
 describe('GraphShortestPaths Single Source', () => {
   beforeAll(() => {
     const sources = 0;
-    const { graph } = graphs.GraphShortestPaths[0];
+    const { graph } = graphs.tinyDigraph;
     algo = search.GraphShortestPaths(graph, sources);
   });
 

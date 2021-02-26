@@ -36,4 +36,35 @@ const GraphFromFile = (fileName, directed) => (
   })
 );
 
-module.exports.Graph = GraphFromFile;
+const BuildGraphs = () => (
+  new Promise((resolve, reject) => {
+    const cases = {
+      tinyGraph: {
+        file: 'tinyGraph.txt',
+        directed: false,
+        graph: null,
+      },
+      tinyDigraph: {
+        file: 'tinyDigraph.txt',
+        directed: true,
+        graph: null,
+      },
+    };
+    const keys = Object.keys(cases);
+    const promises = keys.map((key) => (
+      GraphFromFile(cases[key].file, cases[key].directed)
+    ));
+    Promise.all(promises)
+      .then((results) => {
+        keys.forEach((key, index) => {
+          const cfg = cases[key];
+          cfg.graph = results[index];
+          cases[key] = cfg;
+        });
+        resolve(cases);
+      })
+      .catch((error) => (reject(error)));
+  })
+);
+
+module.exports.Graphs = BuildGraphs;
