@@ -32,7 +32,6 @@ describe.each(names)('%s', (name) => {
       }
       const ref = '8->7->2->3->0->6->9->10->11->12->1->5->4';
       expect(s).toBe(ref);
-      console.log(s);
       done();
     });
   });

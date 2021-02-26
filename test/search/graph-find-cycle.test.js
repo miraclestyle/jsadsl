@@ -30,7 +30,8 @@ describe.each(names)('%s', (name) => {
         s += (cycle.pop()).toString();
         if (!cycle.empty()) s += '->';
       }
-      console.log(s);
+      const ref = '3->5->4->3';
+      expect(s).toBe(ref);
       done();
     });
   });
