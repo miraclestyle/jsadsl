@@ -8,6 +8,7 @@
     "test-util": "jest test/util --collectCoverage",
     "test-sort": "jest test/sort --collectCoverage",
     "test-ds": "jest test/ds --collectCoverage",
+    "test-graph": "jest test/graph --collectCoverage",
     "test-search": "jest test/search --collectCoverage"
   },
   "repository": {

@@ -4,10 +4,10 @@ const {
   test,
   beforeAll,
 } = require('@jest/globals');
-const { search, repeat } = require('../../lib');
+const { graph, repeat } = require('../../lib');
 const { Graph } = require('./data');
 
-search.repeat = repeat;
+graph.repeat = repeat;
 
 const names = ['GraphShortestPaths'];
 
@@ -15,9 +15,9 @@ let algo = null;
 
 describe.each(names)('%s Multiple Sources', (name) => {
   beforeAll(() => (
-    Graph('tinyDigraph.txt', true).then((graph) => {
+    Graph('tinyDigraph.txt', true).then((g) => {
       const sources = [1, 7, 10];
-      algo = search[name](graph, sources);
+      algo = graph[name](g, sources);
       return algo;
     })
   ));
@@ -57,9 +57,9 @@ describe.each(names)('%s Multiple Sources', (name) => {
 
 describe.each(names)('%s Single Source', (name) => {
   beforeAll(() => (
-    Graph('tinyDigraph.txt', true).then((graph) => {
+    Graph('tinyDigraph.txt', true).then((g) => {
       const sources = 0;
-      algo = search[name](graph, sources);
+      algo = graph[name](g, sources);
       return algo;
     })
   ));

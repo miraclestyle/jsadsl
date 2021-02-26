@@ -3,17 +3,17 @@ const {
   expect,
   test,
 } = require('@jest/globals');
-const { search, repeat } = require('../../lib');
+const { graph, repeat } = require('../../lib');
 const { Graph } = require('./data');
 
-search.repeat = repeat;
+graph.repeat = repeat;
 
 const names = ['GraphOrder'];
 
 describe.each(names)('%s', (name) => {
   test('should do topological sort on a given graph', (done) => {
-    Graph('tinyDAG.txt', true).then((graph) => {
-      const process = search[name](graph);
+    Graph('tinyDAG.txt', true).then((g) => {
+      const process = graph[name](g);
       const pre = process.preOrder();
       const post = process.postOrder();
       const reverse = process.reversePostOrder();

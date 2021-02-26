@@ -4,7 +4,7 @@ const path = require('path');
 const { ds } = require('../../../lib');
 
 const getFilePath = (fileName) => (
-  path.resolve('.', 'test', 'search', 'data', fileName)
+  path.resolve('.', 'test', 'graph', 'data', fileName)
 );
 
 const GraphFromFile = (fileName, directed) => (

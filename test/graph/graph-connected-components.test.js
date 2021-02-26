@@ -4,10 +4,10 @@ const {
   test,
   beforeAll,
 } = require('@jest/globals');
-const { search, repeat } = require('../../lib');
+const { graph, repeat } = require('../../lib');
 const { Graph } = require('./data');
 
-search.repeat = repeat;
+graph.repeat = repeat;
 
 const names = ['GraphConnectedComponents'];
 
@@ -15,8 +15,8 @@ let algo = null;
 
 describe.each(names)('%s', (name) => {
   beforeAll(() => (
-    Graph('tinyGraph.txt', false).then((graph) => {
-      algo = search[name](graph);
+    Graph('tinyGraph.txt', false).then((g) => {
+      algo = graph[name](g);
       return algo;
     })
   ));
