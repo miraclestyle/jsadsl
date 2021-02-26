@@ -9,7 +9,7 @@ const { Graph } = require('./data');
 
 graph.repeat = repeat;
 
-const names = ['GraphShortestPaths'];
+const names = ['ShortestPaths'];
 
 let algo = null;
 

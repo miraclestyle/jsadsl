@@ -8,7 +8,7 @@ const { Graph } = require('./data');
 
 graph.repeat = repeat;
 
-const names = ['GraphFindCycle'];
+const names = ['FindCycle'];
 
 describe.each(names)('%s', (name) => {
   test('should not detect cycle in a given graph', (done) => {

@@ -8,7 +8,7 @@ const { Graph } = require('./data');
 
 graph.repeat = repeat;
 
-const names = ['GraphOrder'];
+const names = ['Order'];
 
 describe.each(names)('%s', (name) => {
   test('should do topological sort on a given graph', (done) => {

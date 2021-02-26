@@ -9,7 +9,7 @@ const { Graph } = require('./data');
 
 graph.repeat = repeat;
 
-const names = ['GraphReachable'];
+const names = ['Reachable'];
 
 let algo = null;
 
