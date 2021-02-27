@@ -11,7 +11,7 @@ graph.repeat = repeat;
 const names = ['Order'];
 
 describe.each(names)('%s', (name) => {
-  test('should do topological sort on a given graph', (done) => {
+  test('should do pre-order, post-order, and reverse post-order sort on a given graph', (done) => {
     Graph('tinyDAG.txt', true).then((g) => {
       const process = graph[name](g);
       const pre = process.preOrder();
