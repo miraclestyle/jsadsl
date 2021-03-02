@@ -7,6 +7,23 @@ const getFilePath = (fileName) => (
   path.resolve('.', 'test', 'graph', 'data', fileName)
 );
 
+const generateGraph = (v, directed, edges) => {
+  const graph = ds.Graph(v, directed);
+  edges.forEach((e) => {
+    graph.addEdge(...e);
+  });
+  return graph;
+};
+
+const generateWeightedGraph = (v, directed, edges) => {
+  const graph = ds.WeightedGraph(v, directed);
+  edges.forEach((e) => {
+    const edge = ds.WeightedEdge(...e);
+    graph.addEdge(edge);
+  });
+  return graph;
+};
+
 const GraphFromFile = (fileName, directed) => (
   new Promise((resolve, reject) => {
     const filePath = getFilePath(fileName);
@@ -25,12 +42,18 @@ const GraphFromFile = (fileName, directed) => (
       row += 1;
     });
     lines.on('close', () => {
-      const graph = ds.Graph(v, directed);
-      edges.forEach((e) => {
-        graph.addEdge(...e);
-      });
-      if (v === 0) reject(new Error('Build failed!'));
-      else resolve(graph);
+      if (v === 0) {
+        reject(new Error('Build failed!'));
+        return;
+      }
+      let graph;
+      if (edges[0].length === 2) {
+        graph = generateGraph(v, directed, edges);
+      }
+      if (edges[0].length === 3) {
+        graph = generateWeightedGraph(v, directed, edges);
+      }
+      resolve(graph);
     });
   })
 );
