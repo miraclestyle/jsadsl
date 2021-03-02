@@ -109,6 +109,62 @@ describe.each(graphs)('%s', (name, v, directed) => {
   });
 });
 
+describe('Weighted Graph Edge', () => {
+  test('should verify edge constructor', () => {
+    expect(() => {
+      ds.WeightedEdge('0', 5);
+    }).toThrowError('Invalid argument!');
+    expect(() => {
+      ds.WeightedEdge(0, '5');
+    }).toThrowError('Invalid argument!');
+    expect(() => {
+      ds.WeightedEdge(-1, 5);
+    }).toThrowError('Invalid argument!');
+    expect(() => {
+      ds.WeightedEdge(1, -5);
+    }).toThrowError('Invalid argument!');
+    expect(() => {
+      ds.WeightedEdge(-1, -5);
+    }).toThrowError('Invalid argument!');
+    expect(() => {
+      ds.WeightedEdge(1, 5, 1);
+    }).toThrowError('Invalid argument!');
+  });
+
+  test('should verify either method', () => {
+    const edge = ds.WeightedEdge(1, 5, 1.1);
+    expect(edge.either()).toBe(1);
+  });
+
+  test('should verify other method', () => {
+    const edge = ds.WeightedEdge(1, 5, 1.1);
+    const p = edge.either();
+    expect(edge.other(p)).toBe(5);
+  });
+
+  test('should verify weight method', () => {
+    const edge = ds.WeightedEdge(1, 5, 1.1);
+    const w = edge.weight();
+    expect(w).toBe(1.1);
+  });
+
+  test('should verify toString method', () => {
+    const edge = ds.WeightedEdge(1, 5, 1.1);
+    const s = edge.toString();
+    expect(s).toBe('1-1.1->5');
+  });
+
+  test('should verify compare method', () => {
+    const a = ds.WeightedEdge(1, 5, 0.9);
+    const b = ds.WeightedEdge(1, 7, 1.1);
+    const c = ds.WeightedEdge(1, 5, 1.3);
+    const d = ds.WeightedEdge(1, 5, 1.1);
+    expect(a.compare(a, b)).toBeLessThan(0);
+    expect(a.compare(c, b)).toBeGreaterThan(0);
+    expect(a.compare(d, b)).toBe(0);
+  });
+});
+
 describe.each(weightedGraphs)('%s', (name, v, directed) => {
   beforeEach(() => {
     graph = ds[name](v, directed);
