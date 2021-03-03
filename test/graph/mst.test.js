@@ -7,7 +7,7 @@ const { Graph } = require('./data');
 
 graph.repeat = repeat;
 
-const names = ['KruskalMST'];
+const names = ['KruskalMST', 'LazyPrimMST'];
 
 const graphs = [
   ['mediumEWG.txt', false],
@@ -16,7 +16,7 @@ const graphs = [
 
 describe.each(names)('%s', (name) => {
   test('should find mst in a weighted graph', (done) => {
-    const edges = new Set([
+    const expected = new Set([
       '4-0.35->5',
       '5-0.28->7',
       '0-0.16->7',
@@ -28,12 +28,13 @@ describe.each(names)('%s', (name) => {
     const notInMST = new Set();
     Graph('tinyEWG.txt', false).then((g) => {
       const mst = graph[name](g);
-      while (!mst.empty()) {
-        const edge = mst.dequeue();
+      const edges = mst.edges();
+      while (!edges.empty()) {
+        const edge = edges.dequeue();
         const s = edge.toString();
-        if (!edges.delete(s)) notInMST.add(s);
+        if (!expected.delete(s)) notInMST.add(s);
       }
-      if (edges.size > 0) done(new Error('MST incomplete!'));
+      if (expected.size > 0) done(new Error('MST incomplete!'));
       if (notInMST.size > 0) done(new Error('Rogue edges in MST!'));
       else done();
     });
@@ -42,7 +43,8 @@ describe.each(names)('%s', (name) => {
   test.each(graphs)('should find mst in a weighted graph', (file, dir, done) => {
     Graph(file, dir).then((g) => {
       const mst = graph[name](g);
-      if (mst.size() === g.V() - 1) done();
+      const edges = mst.edges();
+      if (edges.size() === g.V() - 1) done();
       else done(new Error('MST incomplete!'));
     });
   });
