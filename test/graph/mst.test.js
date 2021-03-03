@@ -7,7 +7,7 @@ const { Graph } = require('./data');
 
 graph.repeat = repeat;
 
-const names = ['KruskalMST', 'LazyPrimMST'];
+const names = ['KruskalMST', 'LazyPrimMST', 'EagerPrimMST'];
 
 const graphs = [
   ['mediumEWG.txt', false],
