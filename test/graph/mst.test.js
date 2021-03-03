@@ -49,3 +49,27 @@ describe.each(names)('%s', (name) => {
     });
   });
 });
+
+describe('KruskalMST, LazyPrimMST, EagerPrimMST', () => {
+  test('should ensure that the three algorithms produce same MST', (done) => {
+    const error = (text) => (new Error(text));
+    Graph('1000EWG.txt', false).then((g) => {
+      const kruskal = graph.KruskalMST(g);
+      const lazyPrim = graph.LazyPrimMST(g);
+      const eagerPrim = graph.EagerPrimMST(g);
+      const kruskalW = Number.parseFloat(kruskal.weight()).toPrecision(6);
+      const lazyPrimW = Number.parseFloat(lazyPrim.weight()).toPrecision(6);
+      const eagerPrimW = Number.parseFloat(eagerPrim.weight()).toPrecision(6);
+      const kruskalS = kruskal.edges().size();
+      const lazyPrimS = lazyPrim.edges().size();
+      const eagerPrimS = eagerPrim.edges().size();
+      if (kruskalW !== lazyPrimW) done(error('kruskalW !== lazyPrimW'));
+      if (kruskalW !== eagerPrimW) done(error('kruskalW !== eagerPrimW'));
+      if (lazyPrimW !== eagerPrimW) done(error('lazyPrimW !== eagerPrimW'));
+      if (kruskalS !== lazyPrimS) done(error('kruskalS !== lazyPrimS'));
+      if (kruskalS !== eagerPrimS) done(error('kruskalS !== eagerPrimS'));
+      if (lazyPrimS !== eagerPrimS) done(error('lazyPrimS !== eagerPrimS'));
+      done();
+    });
+  });
+});
