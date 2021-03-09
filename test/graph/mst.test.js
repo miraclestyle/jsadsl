@@ -17,13 +17,13 @@ const graphs = [
 describe.each(names)('%s', (name) => {
   test('should find mst in a weighted graph', (done) => {
     const expected = new Set([
-      '4-0.35->5',
-      '5-0.28->7',
-      '0-0.16->7',
-      '2-0.17->3',
-      '1-0.19->7',
-      '0-0.26->2',
-      '6-0.4->2',
+      '4<-0.35->5',
+      '5<-0.28->7',
+      '0<-0.16->7',
+      '2<-0.17->3',
+      '1<-0.19->7',
+      '0<-0.26->2',
+      '6<-0.4->2',
     ]);
     const notInMST = new Set();
     Graph('tinyEWG.txt', false).then((g) => {
