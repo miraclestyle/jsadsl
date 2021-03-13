@@ -151,7 +151,7 @@ describe('Weighted Graph Edge', () => {
   test('should verify toString method', () => {
     const edge = ds.WeightedEdge(1, 5, 1.1);
     const s = edge.toString();
-    expect(s).toBe('1-1.1->5');
+    expect(s).toBe('1<-1.1->5');
   });
 
   test('should verify compare method', () => {
@@ -178,9 +178,17 @@ describe.each(weightedGraphs)('%s', (name, v, directed) => {
     expect(graph.V()).toBe(13);
   });
 
-  test('should verify E method on a non-empty graph', () => {
+  test('should verify E method on a non-empty undirected graph', () => {
+    if (graph.isDirected()) return;
     expect(graph.E()).toBe(0);
     graph.addEdge(ds.WeightedEdge(0, 5));
+    expect(graph.E()).toBe(1);
+  });
+
+  test('should verify E method on a non-empty directed graph', () => {
+    if (!graph.isDirected()) return;
+    expect(graph.E()).toBe(0);
+    graph.addEdge(ds.WeightedDirectedEdge(0, 5, null));
     expect(graph.E()).toBe(1);
   });
 
@@ -192,7 +200,8 @@ describe.each(weightedGraphs)('%s', (name, v, directed) => {
     });
   });
 
-  test('should verify addEdge and edges methods on a non-empty graph', () => {
+  test('should verify addEdge and edges methods on an non-empty undirected graph', () => {
+    if (graph.isDirected()) return;
     graph.addEdge(ds.WeightedEdge(0, 5));
     const vertices = new Set([5]);
     graph.edges(0, (edge) => {
@@ -209,7 +218,28 @@ describe.each(weightedGraphs)('%s', (name, v, directed) => {
     }).toThrowError('Invalid argument!');
   });
 
+  test('should verify addEdge and edges methods on a non-empty directed graph', () => {
+    if (!graph.isDirected()) return;
+    graph.addEdge(ds.WeightedDirectedEdge(0, 5, null));
+    const vertices = new Set([5]);
+    graph.edges(0, (edge) => {
+      expect(vertices.has(edge.to())).toBe(true);
+    });
+    expect(() => {
+      graph.addEdge(ds.WeightedDirectedEdge(-3, 5, null));
+    }).toThrowError('Invalid argument!');
+    expect(() => {
+      graph.addEdge(ds.WeightedDirectedEdge(0, 21, null));
+    }).toThrowError('Vertex not in graph!');
+    expect(() => {
+      graph.addEdge(ds.WeightedDirectedEdge(-3, 21, null));
+    }).toThrowError('Invalid argument!');
+  });
+
   test('should verify vertices and edges method on a non-empty graph', () => {
+    let edgeName = null;
+    if (graph.isDirected()) edgeName = 'WeightedDirectedEdge';
+    else edgeName = 'WeightedEdge';
     const edges = [
       [0, 5], [4, 3],
       [0, 1], [9, 12],
@@ -222,7 +252,7 @@ describe.each(weightedGraphs)('%s', (name, v, directed) => {
     const vertices = Array.from(new Array(13), () => new Set());
     edges.map((e) => {
       const [p, q] = [...e];
-      const edge = ds.WeightedEdge(p, q);
+      const edge = ds[edgeName](p, q, null);
       graph.addEdge(edge);
       vertices[p].add(q);
       if (!directed) vertices[q].add(p);
@@ -230,7 +260,7 @@ describe.each(weightedGraphs)('%s', (name, v, directed) => {
     });
     graph.vertices((p) => {
       graph.edges(p, (edge) => {
-        const q = edge.other(p);
+        const q = graph.isDirected() ? edge.to() : edge.other(p);
         expect(vertices[p].has(q)).toBe(true);
       });
     });
@@ -238,11 +268,11 @@ describe.each(weightedGraphs)('%s', (name, v, directed) => {
 
   test('should verify reverse method on a non-empty directed graph', () => {
     if (directed) {
-      graph.addEdge(ds.WeightedEdge(0, 5));
+      graph.addEdge(ds.WeightedDirectedEdge(0, 5, null));
       const rg = graph.reverse();
       const vertices = new Set([0]);
       rg.edges(5, (edge) => {
-        const q = edge.other(5);
+        const q = edge.to();
         expect(vertices.has(q)).toBe(true);
       });
     }

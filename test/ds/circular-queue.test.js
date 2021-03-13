@@ -137,6 +137,6 @@ describe.each(structures)('%s', (name) => {
       q.enqueue(i * 10);
     }
     const queue = '[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]';
-    expect(q.print()).toBe(queue);
+    expect(q.toString()).toBe(queue);
   });
 });

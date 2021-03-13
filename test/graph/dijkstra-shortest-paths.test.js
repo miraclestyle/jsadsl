@@ -23,28 +23,28 @@ describe.each(names)('%s Single Source', (name) => {
   ));
 
   test('should verify parentOf method', () => {
-    expect(algo.parentOf(2)).toBe(4);
-    expect(algo.parentOf(3)).toBe(4);
+    expect(algo.parentOf(2)).toBe(0);
+    expect(algo.parentOf(3)).toBe(7);
   });
 
   test('should verify distanceTo method', () => {
-    expect(algo.distanceTo(2)).toBe(3);
-    expect(algo.distanceTo(5)).toBe(1);
+    expect(algo.distanceTo(2)).toBe(0.26);
+    expect(algo.distanceTo(5)).toBe(0.73);
   });
 
   test('should verify pathTo method', () => {
     let path = [];
-    const push = (value) => (path.push(value));
-    algo.pathTo(2).forEach(push);
-    expect(path).toEqual([0, 5, 4, 2]);
+    const push = (value) => (path.push(value.toString()));
+    algo.pathTo(6).forEach(push);
+    expect(path).toEqual(['0-0.26->2', '2-0.34->7', '7-0.39->3', '3-0.52->6']);
     path = [];
     algo.pathTo(5).forEach(push);
-    expect(path).toEqual([0, 5]);
+    expect(path).toEqual(['0-0.38->4', '4-0.35->5']);
     path = [];
   });
 
   test('should verify pathToString method', () => {
-    expect(algo.pathToString(2)).toBe('0->5->4->2');
-    expect(algo.pathToString(5)).toBe('0->5');
+    expect(algo.pathToString(2)).toBe('0-0.26->2');
+    expect(algo.pathToString(5)).toBe('0-0.38->4|4-0.35->5');
   });
 });
