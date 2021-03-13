@@ -18,7 +18,7 @@ const generateGraph = (v, directed, edges) => {
 const generateWeightedGraph = (v, directed, edges) => {
   const graph = ds.WeightedGraph(v, directed);
   edges.forEach((e) => {
-    const edge = ds.WeightedEdge(...e);
+    const edge = directed ? ds.WeightedDirectedEdge(...e) : ds.WeightedEdge(...e);
     graph.addEdge(edge);
   });
   return graph;
