@@ -13,8 +13,9 @@ const names = ['TopologicalSort'];
 describe.each(names)('%s', (name) => {
   test('should not do topological sort on a given graph', (done) => {
     Graph('tinyDigraph.txt', true).then((g) => {
-      const sort = graph[name](g);
-      expect(sort).toBe(null);
+      expect(() => {
+        graph[name](g);
+      }).toThrowError('Graph contains cycles!');
       done();
     });
   });
