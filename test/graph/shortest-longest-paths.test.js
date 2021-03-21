@@ -206,8 +206,8 @@ describe.each(weightedDAG)('%s Longest Paths', (name) => {
       '0-9->4', '4-5->7', '7-6->5', '5-13->6',
     ]);
     path = [];
-    algo.pathTo(5).forEach(push);
-    expect(path).toEqual(['0-9->4', '4-5->7', '7-6->5']);
+    algo.pathTo(3).forEach(push);
+    expect(path).toEqual(['0-9->4', '4-5->7', '7-7->2', '2-3->3']);
     path = [];
   });
 
