@@ -189,7 +189,7 @@ describe.each(weightedDAG)('%s Longest Paths', (name) => {
   ));
 
   test('should verify parentOf method', () => {
-    expect(algo.parentOf(2)).toBe(5);
+    expect(algo.parentOf(2)).toBe(7);
     expect(algo.parentOf(3)).toBe(2);
   });
 
@@ -203,7 +203,7 @@ describe.each(weightedDAG)('%s Longest Paths', (name) => {
     const push = (value) => (path.push(value.toString()));
     algo.pathTo(6).forEach(push);
     expect(path).toEqual([
-      '0-9->4', '4-5->7', '7-6->5', '5-1->2', '2-3->3', '3-9->6',
+      '0-9->4', '4-5->7', '7-6->5', '5-13->6',
     ]);
     path = [];
     algo.pathTo(5).forEach(push);
@@ -212,7 +212,7 @@ describe.each(weightedDAG)('%s Longest Paths', (name) => {
   });
 
   test('should verify pathToString method', () => {
-    expect(algo.pathToString(2)).toBe('0-9->4|4-5->7|7-6->5|5-1->2');
+    expect(algo.pathToString(2)).toBe('0-9->4|4-5->7|7-7->2');
     expect(algo.pathToString(5)).toBe('0-9->4|4-5->7|7-6->5');
   });
 });
