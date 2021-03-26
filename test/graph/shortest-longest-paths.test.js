@@ -106,7 +106,6 @@ describe.each(unweighted)('%s Single Source', (name) => {
   });
 });
 
-
 describe.each(weightedDirected)('%s', (name) => {
   beforeAll(() => (
     Graph('tinyEWD.txt', true).then((g) => {
