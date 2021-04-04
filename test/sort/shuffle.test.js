@@ -1,6 +1,6 @@
 const { sort, repeat } = require('../../lib');
 
-// sort.shuffle = repeat;
+sort.shuffle = repeat;
 
 let array = [];
 
