@@ -2,7 +2,7 @@ const { search, repeat } = require('../../lib');
 
 search.repeat = repeat;
 
-const searhes = ['binary', 'binaryFloor', 'binaryCeiling'];
+const searhes = ['binary', 'binaryFloor', 'binaryCeiling', 'repeat'];
 
 let searched = null;
 let array = [];
@@ -38,6 +38,14 @@ describe.each(searhes)('%s search', (name) => {
         rightOut: 10,
       },
       binaryCeiling: {
+        leftEdge: 1,
+        rightEdge: 11,
+        leftTarget: 3,
+        rightTarget: 9,
+        leftOut: 0,
+        rightOut: 11,
+      },
+      repeat: {
         leftEdge: 1,
         rightEdge: 11,
         leftTarget: 3,

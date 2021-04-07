@@ -2,10 +2,10 @@ const { sort, util, repeat } = require('../../lib');
 
 sort.repeat = repeat;
 
-const sorts = ['keyIndexCounting', 'lsd', 'msd', 'quickRadix', 'repeat'];
+const sorts = ['keyIndexCounting', 'lsd', 'msd', 'quickRadix'];
 const single = new Set(['keyIndexCounting']);
 const fixed = new Set(['lsd']);
-const variable = new Set(['msd', 'quickRadix', 'repeat']);
+const variable = new Set(['msd', 'quickRadix']);
 let array = [];
 
 const init = (count = 100, w = 5) => {
