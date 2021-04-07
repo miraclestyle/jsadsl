@@ -2,7 +2,7 @@ const { search, repeat } = require('../../lib');
 
 search.repeat = repeat;
 
-const searhes = ['binary', 'binaryFloor', 'binaryCeiling', 'repeat'];
+const searhes = ['binary', 'binaryFloor', 'binaryCeiling'];
 
 let searched = null;
 let array = [];
