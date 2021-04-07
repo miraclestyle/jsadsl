@@ -46,12 +46,12 @@ describe.each(searhes)('%s search', (name) => {
         rightOut: 11,
       },
       repeat: {
-        leftEdge: 1,
-        rightEdge: 11,
-        leftTarget: 3,
-        rightTarget: 9,
-        leftOut: 0,
-        rightOut: 11,
+        leftEdge: 0,
+        rightEdge: 10,
+        leftTarget: 2,
+        rightTarget: 8,
+        leftOut: -1,
+        rightOut: -1,
       },
     };
   });
