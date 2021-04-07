@@ -127,7 +127,7 @@ describe('Weighted Graph Edge', () => {
       ds.WeightedEdge(-1, -5);
     }).toThrowError('Invalid argument!');
     expect(() => {
-      ds.WeightedEdge(1, 5, 1);
+      ds.WeightedEdge(1, 5, '1');
     }).toThrowError('Invalid argument!');
   });
 
