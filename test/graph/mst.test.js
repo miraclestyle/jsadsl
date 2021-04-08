@@ -10,8 +10,7 @@ graph.repeat = repeat;
 const names = ['KruskalMST', 'LazyPrimMST', 'EagerPrimMST'];
 
 const graphs = [
-  ['mediumEWG.txt', false],
-  ['1000EWG.txt', false],
+  ['tinyEWG.txt', false],
 ];
 
 describe.each(names)('%s', (name) => {
@@ -53,7 +52,7 @@ describe.each(names)('%s', (name) => {
 describe('KruskalMST, LazyPrimMST, EagerPrimMST', () => {
   test('should ensure that the three algorithms produce same MST', (done) => {
     const error = (text) => (new Error(text));
-    Graph('1000EWG.txt', false).then((g) => {
+    Graph('tinyEWG.txt', false).then((g) => {
       const kruskal = graph.KruskalMST(g);
       const lazyPrim = graph.LazyPrimMST(g);
       const eagerPrim = graph.EagerPrimMST(g);
