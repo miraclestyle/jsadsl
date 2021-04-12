@@ -27,7 +27,6 @@ const populate = (p, a) => {
 
 describe.each(structures)('%s', (name) => {
   beforeEach(() => {
-    array = init();
     pq = ds[name]();
   });
 
@@ -80,6 +79,70 @@ describe.each(structures)('%s', (name) => {
     expect(pq.size()).toBe(0);
     expect(pq.empty()).toBe(true);
     expect(pq.peek()).toBe(null);
+  });
+});
+
+describe.each(structures)('%s', (name) => {
+  beforeEach(() => {
+    array = init();
+    pq = ds[name]();
+  });
+
+  test('should report size of 100 after inserting 100 items in an empty priority queue', () => {
+    populate(pq, array);
+    expect(pq.size()).toBe(100);
+  });
+
+  test('should report non-empty after inserting 100 items in an empty priority queue', () => {
+    populate(pq, array);
+    expect(pq.empty()).toBe(false);
+  });
+
+  test('should return 0 on peek after inserting 100 items in an empty priority queue', () => {
+    populate(pq, array);
+    expect(pq.peek()).toBe(0);
+  });
+
+  test('should return 0 on extract after inserting 100 items in an empty priority queue', () => {
+    populate(pq, array);
+    expect(pq.extract()).toBe(0);
+  });
+
+  test('should return 0 on extract and mainintain state after inserting 100 items in an empty priority queue', () => {
+    populate(pq, array);
+    expect(pq.extract()).toBe(0);
+    expect(pq.size()).toBe(99);
+    expect(pq.empty()).toBe(false);
+    expect(pq.peek()).toBe(1);
+  });
+
+  test('should return extracted items in proper order and mainintain state after inserting 100 items in an empty priority queue', () => {
+    populate(pq, array);
+    let value = 0;
+    while (!pq.empty()) {
+      expect(pq.extract()).toBe(value);
+      value += 1;
+    }
+    value = 0;
+    while (value < 10) {
+      pq.extract();
+      value += 1;
+    }
+    expect(pq.size()).toBe(0);
+    expect(pq.empty()).toBe(true);
+    expect(pq.peek()).toBe(null);
+  });
+});
+
+describe.each(structures)('%s', (name) => {
+  beforeEach(() => {
+    array = init();
+    const compare = (a, b) => {
+      if (a > b) return -1;
+      if (a < b) return 1;
+      return 0;
+    };
+    pq = ds[name](compare);
   });
 
   test('should report size of 100 after inserting 100 items in an empty priority queue', () => {
