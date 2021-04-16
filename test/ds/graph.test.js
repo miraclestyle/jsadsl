@@ -11,6 +11,7 @@ ds.repeat = repeat;
 const graphs = [
   ['Graph', 13, false],
   ['Graph', 13, true],
+  ['repeat', 13, false],
 ];
 
 const weightedGraphs = [
