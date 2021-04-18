@@ -9,7 +9,7 @@ const { Graph } = require('./data');
 
 graph.repeat = repeat;
 
-const names = ['ConnectedComponents'];
+const names = ['ConnectedComponents', 'repeat'];
 
 let algo = null;
 

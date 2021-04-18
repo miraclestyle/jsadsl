@@ -9,7 +9,7 @@ const { Graph } = require('./data');
 
 graph.repeat = repeat;
 
-const unweighted = ['UnweightedShortestPaths', 'repeat'];
+const unweighted = ['UnweightedShortestPaths'];
 
 const weightedDirected = ['DijkstraShortestPaths', 'BellmanFord'];
 
