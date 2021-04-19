@@ -9,7 +9,7 @@ const { Graph } = require('./data');
 
 graph.repeat = repeat;
 
-const names = ['TwoColor', 'repeat'];
+const names = ['TwoColor'];
 
 let algo = null;
 
