@@ -2,7 +2,7 @@ const { search, repeat, sort } = require('../../lib');
 
 search.repeat = repeat;
 
-const searhes = ['quickSelect'];
+const searhes = ['quickSelect', 'repeat'];
 
 let searched = null;
 let array = [];
