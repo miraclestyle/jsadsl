@@ -7,7 +7,7 @@ const {
 
 search.repeat = repeat;
 
-const searhes = ['boyerMoore', 'repeat'];
+const searhes = ['boyerMoore'];
 
 let searched = null;
 let array = [];
