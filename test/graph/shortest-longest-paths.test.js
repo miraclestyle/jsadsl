@@ -146,61 +146,85 @@ describe.each(weightedDirected)('%s', (name) => {
 
 describe.each(weightedDirectedNC)('%s', (name) => {
   beforeAll(() => (
-    Graph('tinyEWDnc.txt', true).then((g) => {
+    Graph('tinyEWDncV2.txt', true).then((g) => {
       const sources = 0;
       algo = graph[name](g, sources);
       return algo;
     })
   ));
 
+  const handleCycle = (algorithm) => {
+    const cycle = algorithm.negativeCycle();
+    const cycleArray = new Array(cycle.size());
+    let i = 0;
+    cycle.forEach((v) => {
+      cycleArray[i] = v;
+      i += 1;
+    });
+    return cycleArray.join('->');
+  };
+
   test('should verify parentOf method', () => {
-    expect(() => {
-      algo.parentOf(2);
-    }).toThrowError('Negative cost cycle exists!');
-    expect(() => {
-      algo.parentOf(3);
-    }).toThrowError('Negative cost cycle exists!');
-    // expect(algo.parentOf(2)).toBe(0);
-    // expect(algo.parentOf(3)).toBe(7);
+    if (algo.hasNegativeCycle()) {
+      expect(() => {
+        algo.parentOf(2);
+      }).toThrowError('Negative cost cycle exists!');
+      expect(handleCycle(algo)).toBe('5->4->7->5');
+    } else {
+      expect(algo.parentOf(2)).toBe(0);
+      expect(algo.parentOf(3)).toBe(7);
+    }
   });
 
   test('should verify distanceTo method', () => {
-    expect(() => {
-      algo.distanceTo(2);
-    }).toThrowError('Negative cost cycle exists!');
-    expect(() => {
-      algo.distanceTo(5);
-    }).toThrowError('Negative cost cycle exists!');
-    // expect(algo.distanceTo(2)).toBe(0.26);
-    // expect(algo.distanceTo(5)).toBe(0.73);
+    if (algo.hasNegativeCycle()) {
+      expect(() => {
+        algo.distanceTo(2);
+      }).toThrowError('Negative cost cycle exists!');
+      expect(() => {
+        algo.distanceTo(5);
+      }).toThrowError('Negative cost cycle exists!');
+      expect(handleCycle(algo)).toBe('5->4->7->5');
+    } else {
+      expect(algo.distanceTo(2)).toBe(0.26);
+      expect(algo.distanceTo(5)).toBe(0.73);
+    }
   });
 
   test('should verify pathTo method', () => {
-    let path = [];
-    const push = (value) => (path.push(value.toString()));
-    expect(() => {
+    if (algo.hasNegativeCycle()) {
+      expect(() => {
+        algo.pathTo(6).forEach(() => (0));
+      }).toThrowError('Negative cost cycle exists!');
+      expect(() => {
+        algo.pathTo(5).forEach(() => (0));
+      }).toThrowError('Negative cost cycle exists!');
+      expect(handleCycle(algo)).toBe('5->4->7->5');
+    } else {
+      let path = [];
+      const push = (value) => (path.push(value.toString()));
       algo.pathTo(6).forEach(push);
-    }).toThrowError('Negative cost cycle exists!');
-    // algo.pathTo(6).forEach(push);
-    // expect(path).toEqual(['0-0.26->2', '2-0.34->7', '7-0.39->3', '3-0.52->6']);
-    path = [];
-    expect(() => {
+      expect(path).toEqual(['0-0.26->2', '2-0.34->7', '7-0.39->3', '3-0.52->6']);
+      path = [];
       algo.pathTo(5).forEach(push);
-    }).toThrowError('Negative cost cycle exists!');
-    // algo.pathTo(5).forEach(push);
-    // expect(path).toEqual(['0-0.38->4', '4-0.35->5']);
-    // path = [];
+      expect(path).toEqual(['0-0.38->4', '4-0.35->5']);
+      path = [];
+    }
   });
 
   test('should verify pathToString method', () => {
-    expect(() => {
-      algo.pathToString(2);
-    }).toThrowError('Negative cost cycle exists!');
-    expect(() => {
-      algo.pathToString(5);
-    }).toThrowError('Negative cost cycle exists!');
-    // expect(algo.pathToString(2)).toBe('0-0.26->2');
-    // expect(algo.pathToString(5)).toBe('0-0.38->4|4-0.35->5');
+    if (algo.hasNegativeCycle()) {
+      expect(() => {
+        algo.pathToString(2);
+      }).toThrowError('Negative cost cycle exists!');
+      expect(() => {
+        algo.pathToString(5);
+      }).toThrowError('Negative cost cycle exists!');
+      expect(handleCycle(algo)).toBe('5->4->7->5');
+    } else {
+      expect(algo.pathToString(2)).toBe('0-0.26->2');
+      expect(algo.pathToString(5)).toBe('0-0.38->4|4-0.35->5');
+    }
   });
 });
 
