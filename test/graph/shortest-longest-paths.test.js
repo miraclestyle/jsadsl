@@ -13,7 +13,10 @@ const unweighted = ['UnweightedShortestPaths'];
 
 const weightedDirected = ['DijkstraShortestPaths', 'BellmanFord'];
 
-const weightedDirectedNC = ['BellmanFord'];
+const weightedDirectedNC = [
+  ['BellmanFord', 'tinyEWDncV2.txt'],
+  ['BellmanFord', 'tinyEWD.txt'],
+];
 
 const weightedDAG = ['EWDAGShortestLongestPaths'];
 
@@ -144,9 +147,9 @@ describe.each(weightedDirected)('%s', (name) => {
   });
 });
 
-describe.each(weightedDirectedNC)('%s', (name) => {
+describe.each(weightedDirectedNC)('%s', (name, file) => {
   beforeAll(() => (
-    Graph('tinyEWDncV2.txt', true).then((g) => {
+    Graph(file, true).then((g) => {
       const sources = 0;
       algo = graph[name](g, sources);
       return algo;
@@ -169,7 +172,9 @@ describe.each(weightedDirectedNC)('%s', (name) => {
       expect(() => {
         algo.parentOf(2);
       }).toThrowError('Negative cost cycle exists!');
-      expect(handleCycle(algo)).toBe('5->4->7->5');
+      if (file === 'tinyEWDncV2.txt') {
+        expect(handleCycle(algo)).toBe('5->4->7->5');
+      }
     } else {
       expect(algo.parentOf(2)).toBe(0);
       expect(algo.parentOf(3)).toBe(7);
@@ -184,7 +189,9 @@ describe.each(weightedDirectedNC)('%s', (name) => {
       expect(() => {
         algo.distanceTo(5);
       }).toThrowError('Negative cost cycle exists!');
-      expect(handleCycle(algo)).toBe('5->4->7->5');
+      if (file === 'tinyEWDncV2.txt') {
+        expect(handleCycle(algo)).toBe('5->4->7->5');
+      }
     } else {
       expect(algo.distanceTo(2)).toBe(0.26);
       expect(algo.distanceTo(5)).toBe(0.73);
@@ -199,7 +206,9 @@ describe.each(weightedDirectedNC)('%s', (name) => {
       expect(() => {
         algo.pathTo(5).forEach(() => (0));
       }).toThrowError('Negative cost cycle exists!');
-      expect(handleCycle(algo)).toBe('5->4->7->5');
+      if (file === 'tinyEWDncV2.txt') {
+        expect(handleCycle(algo)).toBe('5->4->7->5');
+      }
     } else {
       let path = [];
       const push = (value) => (path.push(value.toString()));
@@ -220,7 +229,9 @@ describe.each(weightedDirectedNC)('%s', (name) => {
       expect(() => {
         algo.pathToString(5);
       }).toThrowError('Negative cost cycle exists!');
-      expect(handleCycle(algo)).toBe('5->4->7->5');
+      if (file === 'tinyEWDncV2.txt') {
+        expect(handleCycle(algo)).toBe('5->4->7->5');
+      }
     } else {
       expect(algo.pathToString(2)).toBe('0-0.26->2');
       expect(algo.pathToString(5)).toBe('0-0.38->4|4-0.35->5');
