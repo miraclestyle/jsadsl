@@ -15,12 +15,11 @@ describe.each(names)('%s', (name) => {
     Graph('tinyGraph.txt', false).then((g) => {
       const cycle = graph[name](g);
       expect(cycle).not.toBe(null);
-      let s = '';
-      while (!cycle.empty()) {
-        s += (cycle.pop()).toString();
-        if (!cycle.empty()) s += '->';
-      }
-      expect(s).toBe('3->4->5->3');
+      const s = [];
+      cycle.forEach((edge) => {
+        s.push(edge.toString());
+      });
+      expect(s.join('->')).toBe('3->4->5->3');
       done();
     });
   });
@@ -37,12 +36,11 @@ describe.each(names)('%s', (name) => {
     Graph('tinyDigraph.txt', true).then((g) => {
       const cycle = graph[name](g);
       expect(cycle).not.toBe(null);
-      let s = '';
-      while (!cycle.empty()) {
-        s += (cycle.pop()).toString();
-        if (!cycle.empty()) s += '->';
-      }
-      expect(s).toBe('3->5->4->3');
+      const s = [];
+      cycle.forEach((edge) => {
+        s.push(edge.toString());
+      });
+      expect(s.join('->')).toBe('3->5->4->3');
       done();
     });
   });

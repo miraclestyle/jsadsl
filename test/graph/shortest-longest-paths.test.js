@@ -16,6 +16,7 @@ const weightedDirected = ['DijkstraShortestPaths', 'BellmanFord'];
 const weightedDirectedNC = [
   ['BellmanFord', 'tinyEWDncV2.txt'],
   ['BellmanFord', 'tinyEWD.txt'],
+  // ['BellmanFord', 'tinyEWDV2.txt'],
 ];
 
 const weightedDAG = ['EWDAGShortestLongestPaths'];
@@ -160,11 +161,12 @@ describe.each(weightedDirectedNC)('%s', (name, file) => {
     const cycle = algorithm.negativeCycle();
     const cycleArray = new Array(cycle.size());
     let i = 0;
-    cycle.forEach((v) => {
-      cycleArray[i] = v;
+    cycle.forEach((edge) => {
+      cycleArray[i] = edge.toString();
       i += 1;
     });
-    return cycleArray.join('->');
+    // console.log(cycleArray);
+    return cycleArray;
   };
 
   test('should verify parentOf method', () => {
@@ -173,7 +175,7 @@ describe.each(weightedDirectedNC)('%s', (name, file) => {
         algo.parentOf(2);
       }).toThrowError('Negative cost cycle exists!');
       if (file === 'tinyEWDncV2.txt') {
-        expect(handleCycle(algo)).toBe('5->4->7->5');
+        expect(handleCycle(algo)).toEqual(['4-0.37->7', '7-0.28->5', '5--0.66->4']);
       }
     } else {
       expect(algo.parentOf(2)).toBe(0);
@@ -190,7 +192,7 @@ describe.each(weightedDirectedNC)('%s', (name, file) => {
         algo.distanceTo(5);
       }).toThrowError('Negative cost cycle exists!');
       if (file === 'tinyEWDncV2.txt') {
-        expect(handleCycle(algo)).toBe('5->4->7->5');
+        expect(handleCycle(algo)).toEqual(['4-0.37->7', '7-0.28->5', '5--0.66->4']);
       }
     } else {
       expect(algo.distanceTo(2)).toBe(0.26);
@@ -207,7 +209,7 @@ describe.each(weightedDirectedNC)('%s', (name, file) => {
         algo.pathTo(5).forEach(() => (0));
       }).toThrowError('Negative cost cycle exists!');
       if (file === 'tinyEWDncV2.txt') {
-        expect(handleCycle(algo)).toBe('5->4->7->5');
+        expect(handleCycle(algo)).toEqual(['4-0.37->7', '7-0.28->5', '5--0.66->4']);
       }
     } else {
       let path = [];
@@ -230,7 +232,7 @@ describe.each(weightedDirectedNC)('%s', (name, file) => {
         algo.pathToString(5);
       }).toThrowError('Negative cost cycle exists!');
       if (file === 'tinyEWDncV2.txt') {
-        expect(handleCycle(algo)).toBe('5->4->7->5');
+        expect(handleCycle(algo)).toEqual(['4-0.37->7', '7-0.28->5', '5--0.66->4']);
       }
     } else {
       expect(algo.pathToString(2)).toBe('0-0.26->2');
